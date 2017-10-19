@@ -47,6 +47,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
         try {
             URL url = new URL(contextApp.getResources().getString(R.string.main_api_url) + contextApp.getResources().getString(R.string.user_methodology_api_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setRequestProperty("Authorization", vosdb.getCurrentApikey());
@@ -54,15 +55,13 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
             urlConnection.setAllowUserInteraction(false);
-            urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
-            urlConnection.setRequestMethod("GET");
+            //urlConnection.setDoOutput(true);
+
 
             urlConnection.connect();
             int HttpResult = urlConnection.getResponseCode();
 
             if (HttpResult == HttpURLConnection.HTTP_OK) {
-                System.out.println("PSD: OK response");
                 StringBuilder sb = new StringBuilder();
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -75,7 +74,6 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 vosdb.clearDB("methodologies");
                 db = CurrentInformationHelper.getInstance();
                 JSONArray jsonTemp = new JSONArray(sb.toString());
-                System.out.println("PSD: " + jsonTemp.toString());
                 for (int i = 0; i < jsonTemp.length(); i++){
                     JSONObject currentMethodology = jsonTemp.getJSONObject(i);
                     vosdb.insertMethodology(
@@ -117,12 +115,12 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean response) {
-        System.out.println("PSD: Kill progress");
         mf.showProgress(false);
         if (response) {
         } else {
             Toast.makeText(contextApp, contextApp.getString(R.string.methodology_fetch_error),Toast.LENGTH_SHORT);
         }
+        mf.mla.notifyDataSetChanged();
         mf.setEmptyVisibility();
         mf.fumTask = null;
     }

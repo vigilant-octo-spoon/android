@@ -29,7 +29,7 @@ public class MethodologyFragment extends Fragment {
     public FetchUserMethodologies fumTask = null;
     private ListView lv_methodologies;
     public TextView emptyText;
-    private MethodologyListAdapter mla;
+    public MethodologyListAdapter mla;
     private SwipeRefreshLayout refreshMethodologies;
     private View mProgressView;
 
@@ -65,20 +65,19 @@ public class MethodologyFragment extends Fragment {
         mProgressView = root.findViewById(R.id.methodology_progress);
         emptyText = (TextView) root.findViewById(R.id.filesEmpty);
         emptyText.setTextColor(Color.DKGRAY);
+        mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
+        lv_methodologies.setAdapter(mla);
         if (db.userMethodologies.size() == 0) {
-            System.out.println("PSD: About to fetch");
             showProgress(true);
             fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
             fumTask.execute();
         }
-        mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
-
-        // Inflate the layout for this fragment
         return root;
     }
 
     public void setEmptyVisibility() {
         CurrentInformationHelper db = CurrentInformationHelper.getInstance();
+        System.out.println("PSD:" + db.userMethodologies.size());
         if (db.userMethodologies.size() > 0) {
             emptyText.setVisibility(View.GONE);
         } else {
@@ -120,6 +119,7 @@ public class MethodologyFragment extends Fragment {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
+        mla.notifyDataSetChanged();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -131,6 +131,8 @@ public class MethodologyFragment extends Fragment {
                     refreshMethodologies.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
+
+            emptyText.setVisibility(show ? View.GONE : View.VISIBLE);
 
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
