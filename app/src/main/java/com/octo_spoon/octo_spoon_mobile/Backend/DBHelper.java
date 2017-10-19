@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table if not exists apikeys " +
-                        "(apikey text primary key, firstname text, lastname text)"
+                        "(apikey text primary key, firstname text, lastname text, email text)"
         );
         db.execSQL(
                 "create table if not exists methodologies " +
@@ -45,12 +45,13 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertApikey(String apikey, String firstname, String lastname) {
+    public boolean insertApikey(String apikey, String firstname, String lastname, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("apikey", apikey);
         cv.put("firstname", firstname);
         cv.put("lastname", lastname);
+        cv.put("email", email);
         try {
             db.insertOrThrow("apikeys", null, cv);
         } catch (Exception e) {

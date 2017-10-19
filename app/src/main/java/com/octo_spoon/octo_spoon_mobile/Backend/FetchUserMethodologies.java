@@ -1,13 +1,11 @@
 package com.octo_spoon.octo_spoon_mobile.Backend;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.octo_spoon.octo_spoon_mobile.LoginActivity;
-import com.octo_spoon.octo_spoon_mobile.MainActivity;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 import org.json.JSONArray;
@@ -17,7 +15,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -31,13 +28,13 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     private String apikey;
     private Exception exception;
     private Context contextApp;
-    private MainActivity ma;
+    private LoginActivity ma;
 
-    public FetchUserMethodologies(DBHelper _vosdb, String _apikey, Context _context, MainActivity _ma) {
+    public FetchUserMethodologies(DBHelper _vosdb, String _apikey, Context _context) {
         this.vosdb = _vosdb;
         this.apikey = _apikey;
         this.contextApp = _context;
-        this.ma = _ma;
+        //this.ma = _ma;
     }
 
     protected void onPreExecute() {
@@ -107,12 +104,10 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean response) {
         ma.showProgress(false);
         if (response) {
-            Intent intent = new Intent(contextApp, MainActivity.class);
-            contextApp.startActivity(intent);
         } else {
             Toast.makeText(contextApp, contextApp.getString(R.string.methodology_fetch_error),Toast.LENGTH_SHORT);
         }
-        ma.fumTask = null;
+        //ma.fumTask = null;
     }
 
 }

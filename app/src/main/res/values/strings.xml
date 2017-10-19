@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">octo-spoon-mobile</string>
+    <string name="app_name">VOS</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -15,12 +15,22 @@
     <!-- Strings related to information fetching -->
     <string name="methodology_fetch_error">Hubo un error al obtener las metodologías</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_methodology">MethodologyActivity</string>
+    <!-- Strings related to menus -->
+    <string name="my_methodologies_menu">Mis metodologías</string>
+    <string name="all_methodologies_menu">Ver metodologías</string>
+    <string name="sessions_separator_menu">Sesión</string>
+    <string name="logout_menu">Cerrar sesión</string>
+
+    <string name="hello_blank_fragment">Dummy</string>
 
     <!-- Strings for API text -->
     <string name="main_api_url">https://private-2a1d5-files8.apiary-mock.com/</string>
-    <string name="auth_api_url">auth</string>
+    <string name="auth_api_url">sessions</string>
     <string name="user_methodology_api_url">usermethodology</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
