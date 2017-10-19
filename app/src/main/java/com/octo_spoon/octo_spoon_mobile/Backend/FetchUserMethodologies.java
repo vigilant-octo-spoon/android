@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.octo_spoon.octo_spoon_mobile.LoginActivity;
+import com.octo_spoon.octo_spoon_mobile.MethodologyFragment;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 import org.json.JSONArray;
@@ -25,20 +26,18 @@ import java.net.URL;
 public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
 
     private DBHelper vosdb;
-    private String apikey;
     private Exception exception;
     private Context contextApp;
-    private LoginActivity ma;
+    private MethodologyFragment mf;
 
-    public FetchUserMethodologies(DBHelper _vosdb, String _apikey, Context _context) {
+    public FetchUserMethodologies(DBHelper _vosdb, Context _context, MethodologyFragment _mf) {
         this.vosdb = _vosdb;
-        this.apikey = _apikey;
         this.contextApp = _context;
-        //this.ma = _ma;
+        this.mf = _mf;
     }
 
     protected void onPreExecute() {
-        ma.showProgress(true);
+        mf.showProgress(true);
     }
 
     protected Boolean doInBackground(String... strings) {
@@ -47,7 +46,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("Authorization", apikey);
+            urlConnection.setRequestProperty("Authorization", vosdb.getCurrentApikey());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -102,12 +101,12 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean response) {
-        ma.showProgress(false);
+        mf.showProgress(false);
         if (response) {
         } else {
             Toast.makeText(contextApp, contextApp.getString(R.string.methodology_fetch_error),Toast.LENGTH_SHORT);
         }
-        //ma.fumTask = null;
+        mf.fumTask = null;
     }
 
 }

@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MethodologyFragment.OnFragmentInteractionListener {
 
     private DBHelper vosdb;
-    public FetchUserMethodologies fumTask = null;
     private NavigationView navigationView;
     private TextView mUserName, mUserMail;
 
