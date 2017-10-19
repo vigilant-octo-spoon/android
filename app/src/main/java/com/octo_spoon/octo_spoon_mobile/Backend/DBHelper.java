@@ -32,6 +32,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 "create table if not exists apikeys " +
                         "(apikey text primary key, firstname text, lastname text)"
         );
+        db.execSQL(
+                "create table if not exists methodologies " +
+                        "(name text, description text, organization text, category text, video text)"
+        );
 
     }
 
@@ -55,6 +59,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertMethodology(String name, String description, String organization, String category, String video) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("description", description);
+        cv.put("organization", organization);
+        cv.put("category", category);
+        cv.put("video", video);
+        try {
+            db.insertOrThrow("methodologies",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     public String getCurrentApikey() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from apikeys", null);
@@ -65,6 +85,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getCurrentUser() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from apikeys", null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getMethodologies() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from methodologies", null);
         res.moveToNext();
         return res;
     }
