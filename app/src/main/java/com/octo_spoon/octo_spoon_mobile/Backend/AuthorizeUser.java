@@ -99,7 +99,9 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
                 vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String apikey = jsonTemp.getString("apikey");
-                vosdb.insertApikey(apikey);
+                String firstname = jsonTemp.getString("firstname");
+                String lastname = jsonTemp.getString("lastname");
+                vosdb.insertApikey(apikey,firstname,lastname);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", Integer.toString(HttpResult));

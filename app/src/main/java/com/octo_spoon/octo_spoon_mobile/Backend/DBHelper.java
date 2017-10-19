@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -29,21 +30,23 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table if not exists apikeys " +
-                        "(apikey text primary key)"
+                        "(apikey text primary key, firstname text, lastname text)"
         );
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS announcements");
+        db.execSQL("DROP TABLE IF EXISTS apikeys");
         onCreate(db);
     }
 
-    public boolean insertApikey(String apikey) {
+    public boolean insertApikey(String apikey, String firstname, String lastname) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("apikey", apikey);
+        cv.put("firstname", firstname);
+        cv.put("lastname", lastname);
         try {
             db.insertOrThrow("apikeys", null, cv);
         } catch (Exception e) {
@@ -57,6 +60,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from apikeys", null);
         res.moveToNext();
         return res.getString(0);
+    }
+
+    public Cursor getCurrentUser() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from apikeys", null);
+        res.moveToNext();
+        return res;
     }
 
     public void clearDB(String dbName) {
