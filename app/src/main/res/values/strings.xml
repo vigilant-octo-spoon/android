@@ -21,6 +21,9 @@
     <string name="sessions_separator_menu">Sesión</string>
     <string name="logout_menu">Cerrar sesión</string>
 
+    <!-- String for menu headers -->
+    <string name="my_methodologies_header">Mis Metodologías</string>
+
     <string name="hello_blank_fragment">Dummy</string>
 
     <!-- Strings for API text -->

@@ -1,9 +1,11 @@
 package com.octo_spoon.octo_spoon_mobile;
 
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +21,7 @@ import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MethodologyFragment.OnFragmentInteractionListener {
 
     private DBHelper vosdb;
     public FetchUserMethodologies fumTask = null;
@@ -33,6 +35,12 @@ public class MainActivity extends AppCompatActivity
         vosdb = new DBHelper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle(getString(R.string.my_methodologies_header));
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        // Replace the contents of the container with the new fragment
+        ft.replace(R.id.container, new MethodologyFragment());
+        ft.commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +69,11 @@ public class MainActivity extends AppCompatActivity
         Cursor res = vosdb.getCurrentUser();
         mUserName.setText(res.getString(1) + " " + res.getString(2));
         mUserMail.setText(res.getString(3));
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     @Override
