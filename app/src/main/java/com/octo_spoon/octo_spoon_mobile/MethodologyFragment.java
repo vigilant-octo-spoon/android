@@ -57,7 +57,6 @@ public class MethodologyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        showProgress(true);
         View root = inflater.inflate(R.layout.fragment_methodology, container, false);
         db = CurrentInformationHelper.getInstance();
         lv_methodologies = (ListView) root.findViewById(R.id.listView_methodologies);
@@ -67,6 +66,8 @@ public class MethodologyFragment extends Fragment {
         emptyText = (TextView) root.findViewById(R.id.filesEmpty);
         emptyText.setTextColor(Color.DKGRAY);
         if (db.userMethodologies.size() == 0) {
+            System.out.println("PSD: About to fetch");
+            showProgress(true);
             fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
             fumTask.execute();
         }

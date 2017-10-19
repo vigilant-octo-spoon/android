@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.octo_spoon.octo_spoon_mobile.LoginActivity;
 import com.octo_spoon.octo_spoon_mobile.MethodologyFragment;
 import com.octo_spoon.octo_spoon_mobile.R;
+import com.octo_spoon.octo_spoon_mobile.ViewStructure.MethodologyList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context contextApp;
     private MethodologyFragment mf;
+    private CurrentInformationHelper db;
 
     public FetchUserMethodologies(DBHelper _vosdb, Context _context, MethodologyFragment _mf) {
         this.vosdb = _vosdb;
@@ -37,6 +39,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPreExecute() {
+        System.out.println("PSD: Show progress");
         mf.showProgress(true);
     }
 
@@ -59,6 +62,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
             int HttpResult = urlConnection.getResponseCode();
 
             if (HttpResult == HttpURLConnection.HTTP_OK) {
+                System.out.println("PSD: OK response");
                 StringBuilder sb = new StringBuilder();
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
@@ -69,7 +73,9 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 br.close();
 
                 vosdb.clearDB("methodologies");
+                db = CurrentInformationHelper.getInstance();
                 JSONArray jsonTemp = new JSONArray(sb.toString());
+                System.out.println("PSD: " + jsonTemp.toString());
                 for (int i = 0; i < jsonTemp.length(); i++){
                     JSONObject currentMethodology = jsonTemp.getJSONObject(i);
                     vosdb.insertMethodology(
@@ -80,11 +86,20 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                             currentMethodology.getString("category"),
                             currentMethodology.getString("link_video")
                     );
+                    MethodologyList mL = new MethodologyList(
+                            currentMethodology.getInt("id"),
+                            currentMethodology.getString("title"),
+                            currentMethodology.getString("description"),
+                            currentMethodology.getString("organization"),
+                            currentMethodology.getString("category"),
+                            currentMethodology.getString("link_video")
+                    );
+                    db.userMethodologies.add(mL);
                 }
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", Integer.toString(HttpResult));
-                System.out.println(urlConnection.getResponseMessage());
+                System.out.println("HTTPE: " + urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
         } catch (UnsupportedEncodingException e) {
@@ -102,6 +117,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean response) {
+        System.out.println("PSD: Kill progress");
         mf.showProgress(false);
         if (response) {
         } else {
