@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.octo_spoon.octo_spoon_mobile.Adapters.MethodologyListAdapter;
 import com.octo_spoon.octo_spoon_mobile.Backend.CurrentInformationHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
@@ -23,9 +25,13 @@ import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
 public class MethodologyFragment extends Fragment {
 
     private DBHelper vosdb;
+    private CurrentInformationHelper db;
     public FetchUserMethodologies fumTask = null;
     private ListView lv_methodologies;
     public TextView emptyText;
+    private MethodologyListAdapter mla;
+    private SwipeRefreshLayout refreshMethodologies;
+    private View mProgressView;
 
     // TODO: Rename and change types of parameters
 
@@ -53,12 +59,19 @@ public class MethodologyFragment extends Fragment {
                              Bundle savedInstanceState) {
         showProgress(true);
         View root = inflater.inflate(R.layout.fragment_methodology, container, false);
+        db = CurrentInformationHelper.getInstance();
         lv_methodologies = (ListView) root.findViewById(R.id.listView_methodologies);
         lv_methodologies.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        refreshMethodologies = (SwipeRefreshLayout) root.findViewById(R.id.swipeRefresh_methodology);
+        mProgressView = root.findViewById(R.id.methodology_progress);
         emptyText = (TextView) root.findViewById(R.id.filesEmpty);
         emptyText.setTextColor(Color.DKGRAY);
-        fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
-        fumTask.execute();
+        if (db.userMethodologies.size() == 0) {
+            fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
+            fumTask.execute();
+        }
+        mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
+
         // Inflate the layout for this fragment
         return root;
     }
@@ -109,12 +122,12 @@ public class MethodologyFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+            refreshMethodologies.setVisibility(show ? View.GONE : View.VISIBLE);
+            refreshMethodologies.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    refreshMethodologies.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -130,7 +143,7 @@ public class MethodologyFragment extends Fragment {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            refreshMethodologies.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 }
