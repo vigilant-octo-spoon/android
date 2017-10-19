@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +12,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.octo_spoon.octo_spoon_mobile.Backend.CurrentInformationHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
 
@@ -20,6 +24,8 @@ public class MethodologyFragment extends Fragment {
 
     private DBHelper vosdb;
     public FetchUserMethodologies fumTask = null;
+    private ListView lv_methodologies;
+    public TextView emptyText;
 
     // TODO: Rename and change types of parameters
 
@@ -46,10 +52,24 @@ public class MethodologyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         showProgress(true);
+        View root = inflater.inflate(R.layout.fragment_methodology, container, false);
+        lv_methodologies = (ListView) root.findViewById(R.id.listView_methodologies);
+        lv_methodologies.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        emptyText = (TextView) root.findViewById(R.id.filesEmpty);
+        emptyText.setTextColor(Color.DKGRAY);
         fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
         fumTask.execute();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_methodology, container, false);
+        return root;
+    }
+
+    public void setEmptyVisibility() {
+        CurrentInformationHelper db = CurrentInformationHelper.getInstance();
+        if (db.userMethodologies.size() > 0) {
+            emptyText.setVisibility(View.GONE);
+        } else {
+            emptyText.setVisibility(View.VISIBLE);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

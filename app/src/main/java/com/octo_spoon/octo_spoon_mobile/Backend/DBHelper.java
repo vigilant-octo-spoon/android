@@ -34,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table if not exists methodologies " +
-                        "(name text, description text, organization text, category text, video text)"
+                        "(id integer, name text, description text, organization text, category text, video text)"
         );
 
     }
@@ -60,9 +60,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertMethodology(String name, String description, String organization, String category, String video) {
+    public boolean insertMethodology(int id, String name, String description, String organization, String category, String video) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put("id",id);
         cv.put("name", name);
         cv.put("description", description);
         cv.put("organization", organization);

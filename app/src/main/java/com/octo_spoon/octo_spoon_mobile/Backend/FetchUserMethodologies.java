@@ -73,6 +73,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 for (int i = 0; i < jsonTemp.length(); i++){
                     JSONObject currentMethodology = jsonTemp.getJSONObject(i);
                     vosdb.insertMethodology(
+                            currentMethodology.getInt("id"),
                             currentMethodology.getString("title"),
                             currentMethodology.getString("description"),
                             currentMethodology.getString("organization"),
@@ -106,6 +107,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
         } else {
             Toast.makeText(contextApp, contextApp.getString(R.string.methodology_fetch_error),Toast.LENGTH_SHORT);
         }
+        mf.setEmptyVisibility();
         mf.fumTask = null;
     }
 
