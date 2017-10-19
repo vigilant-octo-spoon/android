@@ -26,11 +26,11 @@
     <!-- Strings for API text -->
     <string name="main_api_url">https://private-2a1d5-files8.apiary-mock.com/</string>
     <string name="auth_api_url">sessions</string>
-    <string name="user_methodology_api_url">usermethodology</string>
+    <string name="user_methodology_api_url">methodologies</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuración</string>
 </resources>

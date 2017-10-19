@@ -1,5 +1,6 @@
 package com.octo_spoon.octo_spoon_mobile;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
@@ -21,11 +23,14 @@ public class MainActivity extends AppCompatActivity
 
     private DBHelper vosdb;
     public FetchUserMethodologies fumTask = null;
+    private NavigationView navigationView;
+    private TextView mUserName, mUserMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        vosdb = new DBHelper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,8 +50,17 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mUserName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.main_username);
+        mUserMail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.main_usermail);
+        processUserData();
+    }
+
+    private void processUserData() {
+        Cursor res = vosdb.getCurrentUser();
+        mUserName.setText(res.getString(1) + " " + res.getString(2));
+        mUserMail.setText(res.getString(3));
     }
 
     @Override

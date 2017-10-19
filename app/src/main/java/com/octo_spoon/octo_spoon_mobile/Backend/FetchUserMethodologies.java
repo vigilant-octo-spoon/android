@@ -74,11 +74,11 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 for (int i = 0; i < jsonTemp.length(); i++){
                     JSONObject currentMethodology = jsonTemp.getJSONObject(i);
                     vosdb.insertMethodology(
-                            currentMethodology.getString("name"),
+                            currentMethodology.getString("title"),
                             currentMethodology.getString("description"),
                             currentMethodology.getString("organization"),
                             currentMethodology.getString("category"),
-                            currentMethodology.getString("video")
+                            currentMethodology.getString("link_video")
                     );
                 }
                 return Boolean.TRUE;
