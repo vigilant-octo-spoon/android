@@ -10,6 +10,10 @@
             android:id="@+id/all_methodologies"
             android:icon="@drawable/ic_people_outline_black_24dp"
             android:title="@string/all_methodologies_menu" />
+        <item
+            android:id="@+id/to_implementation_book"
+            android:icon="@mipmap/ic_to_book"
+            android:title="@string/to_implementation_book" />
     </group>
 
     <item android:title="@string/sessions_separator_menu">

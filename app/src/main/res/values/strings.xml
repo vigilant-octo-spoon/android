@@ -18,6 +18,7 @@
     <!-- Strings related to menus -->
     <string name="my_methodologies_menu">Mis metodologías</string>
     <string name="all_methodologies_menu">Ver metodologías</string>
+    <string name="to_implementation_book">Ir a librillo</string>
     <string name="sessions_separator_menu">Sesión</string>
     <string name="logout_menu">Cerrar sesión</string>
 

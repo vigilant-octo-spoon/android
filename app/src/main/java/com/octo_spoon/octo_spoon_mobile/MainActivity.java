@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +19,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
-import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
+import com.octo_spoon.octo_spoon_mobile.Book.BookStartActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MethodologyFragment.OnFragmentInteractionListener {
@@ -116,6 +117,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.my_methodologies) {
             // Handle the camera action
         } else if (id == R.id.all_methodologies) {
+
+        } else if (id == R.id.to_implementation_book) {
+            Log.i("TO","IMPLEMENTATION");
+            startActivity(BookStartActivity.getIntent(MainActivity.this));
 
         } else if (id == R.id.logout) {
 
