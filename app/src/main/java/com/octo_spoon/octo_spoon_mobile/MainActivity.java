@@ -1,5 +1,7 @@
 package com.octo_spoon.octo_spoon_mobile;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Book.BookStartActivity;
+import com.octo_spoon.octo_spoon_mobile.Book.StageCommunicateActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, MethodologyFragment.OnFragmentInteractionListener {
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //TODO: Use this button to add new methodologies
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "A creación de metodología ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -119,7 +122,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.all_methodologies) {
 
         } else if (id == R.id.to_implementation_book) {
-            Log.i("TO","IMPLEMENTATION");
             startActivity(BookStartActivity.getIntent(MainActivity.this));
 
         } else if (id == R.id.logout) {
@@ -131,5 +133,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context,MainActivity.class);
+        return intent;
+    }
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.octo_spoon.octo_spoon_mobile.MainActivity;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 public class StageCommunicateActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class StageCommunicateActivity extends AppCompatActivity {
         fabToEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(BookEndActivity.getIntent(StageCommunicateActivity.this));
+                startActivity(MainActivity.getIntent(StageCommunicateActivity.this));
             }
         });
     }

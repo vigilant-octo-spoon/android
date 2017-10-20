@@ -49,14 +49,6 @@ public class MethodologyActivity extends AppCompatActivity {
         textOrganization.setText(methodology.getOrganization());
         textCategory.setText(methodology.getCategory());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     // TODO: 19-10-2017 fetch methodology
