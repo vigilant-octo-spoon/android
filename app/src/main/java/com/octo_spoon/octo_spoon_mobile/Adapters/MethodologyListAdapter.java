@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.octo_spoon.octo_spoon_mobile.ViewStructure.MethodologyList;
+import com.octo_spoon.octo_spoon_mobile.ViewStructure.Methodology;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ import com.octo_spoon.octo_spoon_mobile.R;
  */
 
 
-public class MethodologyListAdapter extends ArrayAdapter<MethodologyList> {
-    public MethodologyListAdapter(Context context, List<MethodologyList> objects) {
+public class MethodologyListAdapter extends ArrayAdapter<Methodology> {
+    public MethodologyListAdapter(Context context, List<Methodology> objects) {
         super(context, 0, objects);
 
     }
@@ -46,7 +46,7 @@ public class MethodologyListAdapter extends ArrayAdapter<MethodologyList> {
         TextView fileName = (TextView) convertView.findViewById(R.id.textView_methodologyTitle);
         ImageView fileIcon = (ImageView) convertView.findViewById(R.id.imageView_methodologyIcon);
 
-        MethodologyList methodologyList = getItem(position);
+        Methodology methodology = getItem(position);
         /*
 
         if (documentFile.type.equals("folder") && !documentFile.id.equals("0")){
@@ -61,7 +61,7 @@ public class MethodologyListAdapter extends ArrayAdapter<MethodologyList> {
                 fileIcon.setImageResource(R.drawable.ic_file_download_black_24dp);
             }
         }*/
-        fileName.setText(methodologyList.title);
+        fileName.setText(methodology.getTitle());
 
         return convertView;
     }

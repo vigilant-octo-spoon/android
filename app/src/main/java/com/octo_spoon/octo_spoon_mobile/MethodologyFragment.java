@@ -10,9 +10,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.octo_spoon.octo_spoon_mobile.Adapters.MethodologyListAdapter;
 import com.octo_spoon.octo_spoon_mobile.Backend.CurrentInformationHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
+import com.octo_spoon.octo_spoon_mobile.ViewStructure.Methodology;
 
 
 public class MethodologyFragment extends Fragment {
@@ -67,11 +70,21 @@ public class MethodologyFragment extends Fragment {
         emptyText.setTextColor(Color.DKGRAY);
         mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
         lv_methodologies.setAdapter(mla);
+        Log.i("SIZE",Integer.toString(db.userMethodologies.size()));
+
         if (db.userMethodologies.size() == 0) {
             showProgress(true);
+
             fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
             fumTask.execute();
         }
+        lv_methodologies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Methodology methodology = mla.getItem(i);
+                startActivity(MethodologyActivity.getIntent(getActivity(), methodology.getId()));
+            }
+        });
         return root;
     }
 

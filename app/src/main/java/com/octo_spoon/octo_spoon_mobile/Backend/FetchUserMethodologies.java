@@ -5,10 +5,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.octo_spoon.octo_spoon_mobile.LoginActivity;
 import com.octo_spoon.octo_spoon_mobile.MethodologyFragment;
 import com.octo_spoon.octo_spoon_mobile.R;
-import com.octo_spoon.octo_spoon_mobile.ViewStructure.MethodologyList;
+import com.octo_spoon.octo_spoon_mobile.ViewStructure.Methodology;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +83,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                             currentMethodology.getString("category"),
                             currentMethodology.getString("link_video")
                     );
-                    MethodologyList mL = new MethodologyList(
+                    Methodology mL = new Methodology(
                             currentMethodology.getInt("id"),
                             currentMethodology.getString("title"),
                             currentMethodology.getString("description"),

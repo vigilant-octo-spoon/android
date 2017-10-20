@@ -98,6 +98,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getMethodology(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from methodologies where id = "+ id, null);
+        res.moveToNext();
+        return res;
+    }
+
     public void clearDB(String dbName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(dbName, null, null);
