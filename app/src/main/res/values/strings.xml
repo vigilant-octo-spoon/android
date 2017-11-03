@@ -36,6 +36,13 @@
     <string name="user_methodology_api_url">follows</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <!-- Strings for methodology buttons -->
+    <string name="planificate">Plan</string>
+    <string name="implementate">Impl</string>
+    <string name="evaluate">Eval</string>
+    <string name="communicate">Com</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
