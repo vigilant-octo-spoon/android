@@ -43,11 +43,13 @@ public class MethodologyActivity extends AppCompatActivity {
 
 
         getMethodology();
+        /*
 
         toolbar.setTitle(methodology.getTitle());
         textDescription.setText(methodology.getDescription());
         textOrganization.setText(methodology.getOrganization());
         textCategory.setText(methodology.getCategory());
+        */
 
     }
 
