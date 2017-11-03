@@ -32,6 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "create table if not exists apikeys " +
                         "(apikey text primary key, firstname text, lastname text, email text)"
         );
+        //The users current methodologies
         db.execSQL(
                 "create table if not exists follows " +
                         "(id integer, name text, step int)"
@@ -67,6 +68,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(
                 "create table if not exists reports " +
                         "(id integer, meth_id integer, comment text)"
+        );
+        //All methodologies
+        db.execSQL(
+                "create table if not exists methodologies " +
+                        "(id integer, title text, description text)"
         );
 
     }
@@ -259,6 +265,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getFollows() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from follows", null);
+        res.moveToNext();
+        return res;
+    }
+
     public Cursor getMethodologies() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from methodologies", null);
@@ -266,9 +279,58 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getMethodology(String id) {
+    public Cursor getPlannings(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from methodologies where id = "+ id, null);
+        Cursor res = db.rawQuery("select * from plannings where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getWorkRoles(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from work_roles where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getBroadcasts(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from broadcasts where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getConditions(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from conditions where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getResources(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from resources where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getBinnacles(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from binnacles where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getEvaluations(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from evaluations where meth_id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res;
+    }
+
+    public Cursor getReports(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from reports where meth_id=" + Integer.toString(id), null);
         res.moveToNext();
         return res;
     }
