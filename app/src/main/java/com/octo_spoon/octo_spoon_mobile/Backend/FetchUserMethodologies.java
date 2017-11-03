@@ -77,6 +77,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                     //Save follows
                     int meth_id = saveFollows(currentMethodology, i);
                     //Get step 3
+                    System.out.println("PSD: Saving step 3");
                     JSONObject step3 = currentMethodology.getJSONObject("step3");
                     savePlannings(step3.getJSONObject("planning"), meth_id);
                     saveWorkRoles(step3.getJSONArray("work_roles"), meth_id);
@@ -84,14 +85,18 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                     saveConditions(step3.getJSONArray("conditions"), meth_id);
                     saveResources(step3.getJSONArray("resources"), meth_id);
                     //Get step 4
+                    System.out.println("PSD: Saving step 4");
                     JSONObject step4 = currentMethodology.getJSONObject("step4");
                     saveBinnacles(step4.getJSONArray("binnacles"), meth_id);
                     //Get step 5
+                    System.out.println("PSD: Saving step 5");
                     JSONObject step5 = currentMethodology.getJSONObject("step5");
                     saveEvaluation(step5.getJSONObject("evaluation"), meth_id);
                     //Get step 6
+                    System.out.println("PSD: Saving step 6");
                     JSONObject step6 = currentMethodology.getJSONObject("step6");
                     saveReport(step6.getJSONObject("report"), meth_id);
+                    System.out.println("PSD: Finished saving");
                 }
                 return Boolean.TRUE;
             } else {
@@ -227,7 +232,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 evaluation.getString("comments_connect"),
                 evaluation.getString("comments_select"),
                 evaluation.getString("comments_planning"),
-                evaluation.getString("comments_implemmentation"),
+                evaluation.getString("comments_implementation"),
                 evaluation.getString("users_reflection"),
                 evaluation.getString("users_suggestions")
         );
