@@ -33,11 +33,11 @@ public class DBHelper extends SQLiteOpenHelper {
                         "(apikey text primary key, firstname text, lastname text, email text)"
         );
         db.execSQL(
-                "create table if not exists methodologies " +
+                "create table if not exists follows " +
                         "(id integer, name text, step int)"
         );
         db.execSQL(
-                "create table if not exists planning " +
+                "create table if not exists plannings " +
                         "(id integer, meth_id integer, initiative_name text, objective text, place text, start_date text, finish_date text)"
         );
         db.execSQL(
@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "(id integer, meth_id integer, comments_connect text, comments_select text, comments_planning text, comments_implementation text, users_reflection text, users_suggestions text)"
         );
         db.execSQL(
-                "create table if not exists resports " +
+                "create table if not exists reports " +
                         "(id integer, meth_id integer, comment text)"
         );
 
@@ -92,17 +92,153 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertMethodology(int id, String name, String description, String organization, String category, String video) {
+    public boolean insertFollow(int id, String name, int step) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id",id);
         cv.put("name", name);
-        cv.put("description", description);
-        cv.put("organization", organization);
-        cv.put("category", category);
-        cv.put("video", video);
+        cv.put("step", step);
         try {
-            db.insertOrThrow("methodologies",null,cv);
+            db.insertOrThrow("follows",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertPlanning(int id, int meth_id, String initiative_name, String objective, String place, String start_date, String finish_date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("initiative_name", initiative_name);
+        cv.put("objective", objective);
+        cv.put("place", place);
+        cv.put("start_date", start_date);
+        cv.put("finish_date", finish_date);
+        try {
+            db.insertOrThrow("plannings",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertWorkRole(int id, int meth_id, String name, String role) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("name", name);
+        cv.put("role", role);
+        try {
+            db.insertOrThrow("work_roles",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertBroadcast(int id, int meth_id, String moment_of_implementation, String audience, String diffusion_channel, String objective) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("moment_of_implementation", moment_of_implementation);
+        cv.put("audience", audience);
+        cv.put("diffusion_channel", diffusion_channel);
+        cv.put("objective", objective);
+        try {
+            db.insertOrThrow("broadcasts",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertCondition(int id, int meth_id, String item, String info) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("item", item);
+        cv.put("info", info);
+        try {
+            db.insertOrThrow("conditions",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertResource(int id, int meth_id, String item, boolean available, String acquisition) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("item", item);
+        if (available) {
+            cv.put("available", 1);
+        } else {
+            cv.put("available", 0);
+        }
+        cv.put("acquisition", acquisition);
+        try {
+            db.insertOrThrow("resources",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertBinnacle(int id, int meth_id, String start_date, String finish_date, String objectives, String observations, String advances, String obstacles, String ideas) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("start_date", start_date);
+        cv.put("finish_date", finish_date);
+        cv.put("objectives", objectives);
+        cv.put("observations", observations);
+        cv.put("advances", advances);
+        cv.put("obstacles", obstacles);
+        cv.put("ideas", ideas);
+        try {
+            db.insertOrThrow("conditions",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertEvaluation(int id, int meth_id, String comment) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("comment", comment);
+        try {
+            db.insertOrThrow("reports",null,cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean insertReport(int id, int meth_id, String comments_connect, String comments_select, String comments_planning, String comments_implementation,
+                                    String users_reflection, String users_suggestions) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("meth_id", meth_id);
+        cv.put("comments_connect", comments_connect);
+        cv.put("comments_select", comments_select);
+        cv.put("comments_planning", comments_planning);
+        cv.put("comments_implementation", comments_implementation);
+        cv.put("users_reflection", users_reflection);
+        cv.put("users_suggestions", users_suggestions);
+        try {
+            db.insertOrThrow("evaluations",null,cv);
         } catch (Exception e) {
             return false;
         }
