@@ -339,4 +339,18 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(dbName, null, null);
     }
+
+    public void clearEntireDB() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("follows", null, null);
+        db.delete("methodologies", null, null);
+        db.delete("plannings", null, null);
+        db.delete("work_roles", null, null);
+        db.delete("broadcasts", null, null);
+        db.delete("conditions", null, null);
+        db.delete("resources", null, null);
+        db.delete("binnacles", null, null);
+        db.delete("evaluations", null, null);
+        db.delete("reports", null, null);
+    }
 }
