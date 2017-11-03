@@ -78,12 +78,20 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                     int meth_id = saveFollows(currentMethodology, i);
                     //Get step 3
                     JSONObject step3 = currentMethodology.getJSONObject("step3");
-                    //Save plannings
                     savePlannings(step3.getJSONObject("planning"), meth_id);
-                    //Save work roles
                     saveWorkRoles(step3.getJSONArray("work_roles"), meth_id);
-                    //Save broadcasts
                     saveBroadcasts(step3.getJSONArray("broadcasts"), meth_id);
+                    saveConditions(step3.getJSONArray("conditions"), meth_id);
+                    saveResources(step3.getJSONArray("resources"), meth_id);
+                    //Get step 4
+                    JSONObject step4 = currentMethodology.getJSONObject("step4");
+                    saveBinnacles(step4.getJSONArray("binnacles"), meth_id);
+                    //Get step 5
+                    JSONObject step5 = currentMethodology.getJSONObject("step5");
+                    saveEvaluation(step5.getJSONObject("evaluation"), meth_id);
+                    //Get step 6
+                    JSONObject step6 = currentMethodology.getJSONObject("step6");
+                    saveReport(step6.getJSONObject("report"), meth_id);
                 }
                 return Boolean.TRUE;
             } else {
@@ -170,4 +178,66 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
         }
     }
 
+    private void saveConditions(JSONArray conditions, int meth_id) throws JSONException {
+        for (int j = 0; j < conditions.length(); j++) {
+            JSONObject condition = conditions.getJSONObject(j);
+            vosdb.insertCondition(
+                    condition.getInt("id"),
+                    meth_id,
+                    condition.getString("item"),
+                    condition.getString("info")
+            );
+        }
+    }
+
+    private void saveResources(JSONArray resources, int meth_id) throws JSONException {
+        for (int j = 0; j < resources.length(); j++) {
+            JSONObject resource = resources.getJSONObject(j);
+            vosdb.insertResource(
+                    resource.getInt("id"),
+                    meth_id,
+                    resource.getString("item"),
+                    resource.getBoolean("available"),
+                    resource.getString("acquisition")
+            );
+        }
+    }
+
+    private void saveBinnacles(JSONArray binnacles, int meth_id) throws JSONException {
+        for (int j = 0; j < binnacles.length(); j++) {
+            JSONObject binnacle = binnacles.getJSONObject(j);
+            vosdb.insertBinnacle(
+                    binnacle.getInt("id"),
+                    meth_id,
+                    binnacle.getString("start_date"),
+                    binnacle.getString("finish_date"),
+                    binnacle.getString("objectives"),
+                    binnacle.getString("observations"),
+                    binnacle.getString("advances"),
+                    binnacle.getString("obstacles"),
+                    binnacle.getString("ideas")
+            );
+        }
+    }
+
+    private void saveEvaluation(JSONObject evaluation, int meth_id) throws JSONException{
+        vosdb.insertEvaluation(
+                evaluation.getInt("id"),
+                meth_id,
+                evaluation.getString("comments_connect"),
+                evaluation.getString("comments_select"),
+                evaluation.getString("comments_planning"),
+                evaluation.getString("comments_implemmentation"),
+                evaluation.getString("users_reflection"),
+                evaluation.getString("users_suggestions")
+        );
+    }
+
+    private void saveReport(JSONObject report, int meth_id) throws JSONException {
+        vosdb.insertReport(
+                report.getInt("id"),
+                meth_id,
+                report.getString("comment")
+        );
+    }
 }

@@ -217,7 +217,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertEvaluation(int id, int meth_id, String comment) {
+    public boolean insertReport(int id, int meth_id, String comment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id", id);
@@ -231,7 +231,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertReport(int id, int meth_id, String comments_connect, String comments_select, String comments_planning, String comments_implementation,
+    public boolean insertEvaluation(int id, int meth_id, String comments_connect, String comments_select, String comments_planning, String comments_implementation,
                                     String users_reflection, String users_suggestions) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
