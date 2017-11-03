@@ -68,26 +68,22 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                 }
                 br.close();
 
-                vosdb.clearDB("methodologies");
+                vosdb.clearEntireDB();
                 db = CurrentInformationHelper.getInstance();
-                JSONArray jsonTemp = new JSONArray(sb.toString());
-                for (int i = 0; i < jsonTemp.length(); i++){
+                JSONObject jsonInit = new JSONObject(sb.toString());
+                JSONArray jsonTemp = jsonInit.getJSONArray("follows");
+                for (int i = 0; i < jsonTemp.length(); i++) {
+                    //Each follows
                     JSONObject currentMethodology = jsonTemp.getJSONObject(i);
-                    vosdb.insertMethodology(
+                    vosdb.insertFollow(
                             currentMethodology.getInt("id"),
-                            currentMethodology.getString("title"),
-                            currentMethodology.getString("description"),
-                            currentMethodology.getString("organization"),
-                            currentMethodology.getString("category"),
-                            currentMethodology.getString("link_video")
+                            currentMethodology.getString("name"),
+                            currentMethodology.getInt("step")
                     );
                     Methodology mL = new Methodology(
                             currentMethodology.getInt("id"),
-                            currentMethodology.getString("title"),
-                            currentMethodology.getString("description"),
-                            currentMethodology.getString("organization"),
-                            currentMethodology.getString("category"),
-                            currentMethodology.getString("link_video")
+                            currentMethodology.getString("name"),
+                            currentMethodology.getInt("step")
                     );
                     db.userMethodologies.add(mL);
                 }

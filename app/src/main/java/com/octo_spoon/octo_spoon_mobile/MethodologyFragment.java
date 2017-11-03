@@ -82,7 +82,7 @@ public class MethodologyFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Methodology methodology = mla.getItem(i);
-                startActivity(MethodologyActivity.getIntent(getActivity(), methodology.getId()));
+                startActivity(MethodologyActivity.getIntent(getActivity(), methodology.id));
             }
         });
         return root;
