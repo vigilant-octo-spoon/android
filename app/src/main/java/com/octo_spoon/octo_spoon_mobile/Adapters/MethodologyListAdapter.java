@@ -61,7 +61,7 @@ public class MethodologyListAdapter extends ArrayAdapter<Methodology> {
                 fileIcon.setImageResource(R.drawable.ic_file_download_black_24dp);
             }
         }*/
-        fileName.setText(methodology.getTitle());
+        fileName.setText(methodology.title);
 
         return convertView;
     }
