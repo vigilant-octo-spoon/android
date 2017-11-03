@@ -391,7 +391,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text="Ejemplos preguntas para Estudiantes"
                 android:textStyle="bold" />
 
             <TextView
@@ -406,7 +406,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text="Ejemplos preguntas para directivos, profesores, apoderados, etc."
                 android:textStyle="bold" />
 
             <TextView
