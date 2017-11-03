@@ -54,8 +54,6 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
             urlConnection.setAllowUserInteraction(false);
-            //urlConnection.setDoOutput(true);
-
 
             urlConnection.connect();
             int HttpResult = urlConnection.getResponseCode();

@@ -34,7 +34,39 @@ public class DBHelper extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table if not exists methodologies " +
-                        "(id integer, name text, description text, organization text, category text, video text)"
+                        "(id integer, name text, step int)"
+        );
+        db.execSQL(
+                "create table if not exists planning " +
+                        "(id integer, meth_id integer, initiative_name text, objective text, place text, start_date text, finish_date text)"
+        );
+        db.execSQL(
+                "create table if not exists work_roles " +
+                        "(id integer, meth_id integer, name text, role text)"
+        );
+        db.execSQL(
+                "create table if not exists broadcasts " +
+                        "(id integer, meth_id integer, moment_of_implementation text, audience text, diffusion_channel text, objective text)"
+        );
+        db.execSQL(
+                "create table if not exists conditions " +
+                        "(id integer, meth_id integer, item text, info text)"
+        );
+        db.execSQL(
+                "create table if not exists resources " +
+                        "(id integer, meth_id integer, item text, available integer, acquisition text)"
+        );
+        db.execSQL(
+                "create table if not exists binnacles " +
+                        "(id integer, meth_id integer, start_date text, finish_date text, objectives text, observations text, advances text, obstacles text, ideas text)"
+        );
+        db.execSQL(
+                "create table if not exists evaluations " +
+                        "(id integer, meth_id integer, comments_connect text, comments_select text, comments_planning text, comments_implementation text, users_reflection text, users_suggestions text)"
+        );
+        db.execSQL(
+                "create table if not exists resports " +
+                        "(id integer, meth_id integer, comment text)"
         );
 
     }
