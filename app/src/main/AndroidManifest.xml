@@ -28,8 +28,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MethodologyActivity" />
         <activity android:name=".Book.BookStartActivity" />
-        <activity android:name=".Book.StageConnectActivity" />
-        <activity android:name=".Book.StageChooseActivity" />
         <activity android:name=".Book.StagePlanActivity" />
         <activity android:name=".Book.StageImplementationActivity" />
         <activity android:name=".Book.StageEvaluateActivity" />
