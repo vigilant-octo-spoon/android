@@ -23,7 +23,7 @@ public class BookStartActivity extends AppCompatActivity {
         fabToConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(StagePlanActivity.getIntent(BookStartActivity.this));
+                    startActivity(StagePlanificationActivity.getIntent(BookStartActivity.this));
             }
         });
 

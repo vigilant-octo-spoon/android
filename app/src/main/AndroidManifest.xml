@@ -28,11 +28,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MethodologyActivity" />
         <activity android:name=".Book.BookStartActivity" />
-        <activity android:name=".Book.StagePlanActivity" />
         <activity android:name=".Book.StageImplementationActivity" />
         <activity android:name=".Book.StageEvaluateActivity" />
         <activity android:name=".Book.StageCommunicateActivity" />
-        <activity android:name=".Book.BookEndActivity"></activity>
+        <activity android:name=".Book.BookEndActivity" />
+        <activity
+            android:name=".Book.StagePlanificationActivity"
+            android:label="@string/title_activity_stage_planification"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
