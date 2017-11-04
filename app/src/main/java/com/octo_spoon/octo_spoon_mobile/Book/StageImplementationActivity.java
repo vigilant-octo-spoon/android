@@ -18,9 +18,7 @@ public class StageImplementationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_implementation);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Implementar");
+        getSupportActionBar().setTitle("Implementar");
 
         fabToEvaluate = (FloatingActionButton) findViewById(R.id.fab_to_evaluate);
         fabToEvaluate.setOnClickListener(new View.OnClickListener() {
