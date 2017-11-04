@@ -19,8 +19,7 @@ public class StageEvaluateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_evaluate);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Evaluar");
+        getSupportActionBar().setTitle("Evaluar");
 
         fabToCommunicate = (FloatingActionButton) findViewById(R.id.fab_to_communicate);
         fabToCommunicate.setOnClickListener(new View.OnClickListener() {
