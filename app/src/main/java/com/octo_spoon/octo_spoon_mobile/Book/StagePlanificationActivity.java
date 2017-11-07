@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -84,44 +85,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
         fabToImplementation = (FloatingActionButton) findViewById(R.id.fab_to_implementation);
         setFabToImplementationListener();
 
-        FragmentManager fragmentManager = StagePlanificationActivity.this.getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-
-        //ROUTE SHEET FRAGMENT ELEMENTS
-        editRouteSheetSelectedMethodology = fragments.get(0).getView().findViewById(R.id.edit_selected_methodology);
-        editRouteSheetInitiative = fragments.get(0).getView().findViewById(R.id.edit_initiative);
-        editRouteSheetObjective = fragments.get(0).getView().findViewById(R.id.edit_objective);
-        editRouteSheetImplementationPlace = fragments.get(0).getView().findViewById(R.id.edit_implementation_place);
-        editRouteSheetImplementationPeriod = fragments.get(0).getView().findViewById(R.id.edit_implementation_period);
-        editRouteSheetTeamMember1 = fragments.get(0).getView().findViewById(R.id.edit_team_member_1);
-        editRouteSheetTeamMember2 = fragments.get(0).getView().findViewById(R.id.edit_team_member_2);
-        editRouteSheetTeamMember3 = fragments.get(0).getView().findViewById(R.id.edit_team_member_3);
-        editRouteSheetTeamMember4 = fragments.get(0).getView().findViewById(R.id.edit_team_member_4);
-        editRouteSheetTeamMember5 = fragments.get(0).getView().findViewById(R.id.edit_team_member_5);
-
-        //ROSOURCES FRAGMENT ELEMENTS
-        editResourcesItem1 = fragments.get(1).getView().findViewById(R.id.edit_resources_1);
-        editResourcesItem2 = fragments.get(1).getView().findViewById(R.id.edit_resources_2);
-        editResourcesItem3 = fragments.get(1).getView().findViewById(R.id.edit_resources_3);
-        editResourcesItem4 = fragments.get(1).getView().findViewById(R.id.edit_resources_4);
-        editResourcesItem5 = fragments.get(1).getView().findViewById(R.id.edit_resources_5);
-        editResourcesCondition1 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_1);
-        editResourcesCondition2 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_2);
-        editResourcesCondition3 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_3);
-        editResourcesCondition4 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_4);
-        editResourcesCondition5 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_5);
-
-        //IMPLEMENTATION FRAGMENT ELEMENTS
-        editDiffusionBeforeAudience = fragments.get(2).getView().findViewById(R.id.editText26);
-        editDiffusionBeforeDifussionChannel = fragments.get(2).getView().findViewById(R.id.editText27);
-        editDiffusionBeforeObjective = fragments.get(2).getView().findViewById(R.id.editText28);
-        editDiffusionDuringAudience = fragments.get(2).getView().findViewById(R.id.editText29);
-        editDiffusionDuringDifussionChannel = fragments.get(2).getView().findViewById(R.id.editText30);
-        editDiffusionDuringObjective = fragments.get(2).getView().findViewById(R.id.editText31);
-        editDiffusionAfterAudience = fragments.get(2).getView().findViewById(R.id.editText32);
-        editDiffusionAfterDifussionChannel = fragments.get(2).getView().findViewById(R.id.editText33);
-        editDiffusionAfterObjective = fragments.get(2).getView().findViewById(R.id.editText34);
-
     }
 
     public void setFabToImplementationListener() {
@@ -129,6 +92,50 @@ public class StagePlanificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: 07-11-2017 send info to api
+
+                FragmentManager fragmentManager = StagePlanificationActivity.this.getSupportFragmentManager();
+                List<Fragment> fragments = fragmentManager.getFragments();
+
+                //ROUTE SHEET FRAGMENT ELEMENTS
+                editRouteSheetSelectedMethodology = fragments.get(0).getView().findViewById(R.id.edit_selected_methodology);
+                editRouteSheetInitiative = fragments.get(0).getView().findViewById(R.id.edit_initiative);
+                editRouteSheetObjective = fragments.get(0).getView().findViewById(R.id.edit_objective);
+                editRouteSheetImplementationPlace = fragments.get(0).getView().findViewById(R.id.edit_implementation_place);
+                editRouteSheetImplementationPeriod = fragments.get(0).getView().findViewById(R.id.edit_implementation_period);
+                editRouteSheetTeamMember1 = fragments.get(0).getView().findViewById(R.id.edit_team_member_1);
+                editRouteSheetTeamMember2 = fragments.get(0).getView().findViewById(R.id.edit_team_member_2);
+                editRouteSheetTeamMember3 = fragments.get(0).getView().findViewById(R.id.edit_team_member_3);
+                editRouteSheetTeamMember4 = fragments.get(0).getView().findViewById(R.id.edit_team_member_4);
+                editRouteSheetTeamMember5 = fragments.get(0).getView().findViewById(R.id.edit_team_member_5);
+
+                //ROSOURCES FRAGMENT ELEMENTS
+                editResourcesItem1 = fragments.get(1).getView().findViewById(R.id.edit_resources_1);
+                editResourcesItem2 = fragments.get(1).getView().findViewById(R.id.edit_resources_2);
+                editResourcesItem3 = fragments.get(1).getView().findViewById(R.id.edit_resources_3);
+                editResourcesItem4 = fragments.get(1).getView().findViewById(R.id.edit_resources_4);
+                editResourcesItem5 = fragments.get(1).getView().findViewById(R.id.edit_resources_5);
+                editResourcesCondition1 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_1);
+                editResourcesCondition2 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_2);
+                editResourcesCondition3 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_3);
+                editResourcesCondition4 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_4);
+                editResourcesCondition5 = fragments.get(1).getView().findViewById(R.id.edit_other_conditions_5);
+
+                //IMPLEMENTATION FRAGMENT ELEMENTS
+                editDiffusionBeforeAudience = fragments.get(1).getView().findViewById(R.id.editText26);
+                editDiffusionBeforeDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText27);
+                editDiffusionBeforeObjective = fragments.get(1).getView().findViewById(R.id.editText28);
+                editDiffusionDuringAudience = fragments.get(1).getView().findViewById(R.id.editText29);
+                editDiffusionDuringDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText30);
+                editDiffusionDuringObjective = fragments.get(1).getView().findViewById(R.id.editText31);
+                editDiffusionAfterAudience = fragments.get(1).getView().findViewById(R.id.editText32);
+                editDiffusionAfterDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText33);
+                editDiffusionAfterObjective = fragments.get(1).getView().findViewById(R.id.editText34);
+
+                // TODO: 07-11-2017 REQUEST
+
+                Log.i("aaa",editRouteSheetSelectedMethodology.getText().toString());
+                Log.i("aaa",editResourcesItem1.getText().toString());
+                Log.i("aaa",editDiffusionBeforeAudience.getText().toString());
 
                 startActivity(StageImplementationActivity.getIntent(StagePlanificationActivity.this));
 
@@ -149,8 +156,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                     return new PlanificationRouteSheetFragment();
                 case 1:
                     return new PlanificationResourcesFragment();
-                case 2:
-                    return new PlanificationDiffusionInstancesFragment();
             }
             return null;
         }
@@ -158,7 +163,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -167,9 +172,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 case 0:
                     return "Hoja de Ruta";
                 case 1:
-                    return "Recursos";
-                case 2:
-                    return "Difusión";
+                    return "Recursos y Difusión";
             }
             return null;
         }
