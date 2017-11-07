@@ -1,13 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.octo_spoon.octo_spoon_mobile.Book.PlanificationRouteSheetFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_plan_title_one"
@@ -146,6 +146,15 @@
 
         <EditText
             android:id="@+id/edit_team_member_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nombre y rol"
+            android:inputType="textPersonName"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edit_team_member_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
