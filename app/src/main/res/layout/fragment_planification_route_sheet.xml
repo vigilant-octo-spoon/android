@@ -1,13 +1,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.octo_spoon.octo_spoon_mobile.Book.PlanificationRouteSheetFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_left"
+        android:paddingRight="@dimen/margin_right">
 
         <TextView
             android:id="@+id/text_plan_title_one"
@@ -18,7 +20,7 @@
             android:paddingStart="8dp"
             android:paddingTop="16dp"
             android:text="Hoja de ruta para la implementación"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -37,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <TextView
@@ -54,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <TextView
@@ -71,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <TextView
@@ -88,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <TextView
@@ -105,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <TextView
@@ -123,7 +125,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre y rol"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <EditText
@@ -132,7 +134,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre y rol"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <EditText
@@ -141,7 +143,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre y rol"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
         <EditText
@@ -150,14 +152,18 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre y rol"
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
             android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/text_plan_instructions"
+        <EditText
+            android:id="@+id/edit_team_member_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:ems="10"
+            android:hint="Nombre y rol"
+            android:inputType="textMultiLine"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </ScrollView>

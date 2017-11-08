@@ -50,22 +50,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_left"
+            android:paddingRight="@dimen/margin_right"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
             <TextView
-                android:id="@+id/text_binnacle"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
                 android:text="Bitácora"
-                android:textAppearance="@android:style/TextAppearance.Material.Title" />
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,21 +91,23 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Fecha de inicio"
-                    android:inputType="textPersonName" />
+                    android:inputType="textMultiLine" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/text_explanation_date_initial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Indica qué cambios y/o logros buscas obtener con esta actividad específica, usando la(s) metodología(s) elegida(s), esto te ayuda a orientar la actividada para luego analizar si resultó o no." />
 
             <EditText
                 android:id="@+id/edit_dates"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:text="Name" />
 
             <LinearLayout
@@ -125,7 +131,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Fecha de inicio"
-                    android:inputType="textPersonName" />
+                    android:inputType="textMultiLine" />
             </LinearLayout>
 
             <LinearLayout
@@ -133,19 +139,14 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/image_stage_one"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_menu_gallery" />
-
                 <TextView
                     android:id="@+id/text_label_observ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Observaciones" />
+                    android:text="Observaciones"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -153,15 +154,17 @@
                 android:id="@+id/text_observations_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Describe aquí las condiciones bajo las cuales se desarrolló la actividad (por ejemplo: clima escolar/aula, alguna situación específica dentro o fuera de clase/escuela, etcétera). Cualquier acontecimiento o reflexión (positiva o negativa) que parezca importante dejar registrada (esto te permitirá pensar en medidas futuras que te ayuden al logro de la implementación)." />
 
             <EditText
                 android:id="@+id/edit_observations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Observaciones"
+                android:inputType="textMultiLine" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,19 +172,14 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/image_stage_two"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_menu_gallery" />
-
                 <TextView
                     android:id="@+id/text_label_advances"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Avances" />
+                    android:text="Avances"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -189,16 +187,18 @@
                 android:id="@+id/text_advances_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Indica si se cumplieron los objetivos que te habías propuesto, por qué, en qué lo notas. Indica cambios positivos (por ejemplo, en el/los ejecutores de la metodología y/o en el público objetivo). Pon atención a los procesos de participación y colaboración de los participantes, considerando por ejemplo la heterogeneidad del grupo. Reflexiona sobre los efectos provocados: motivación, interés, desarrollo de habilidades (socio cognitivas, disciplinarias y tecnológicas pretendidas), entre otros. Aunque los cambios no ocurran de un día para el otro, cada pequeño avance es relevante para ¡poder potenciarlos!" />
 
             <EditText
                 android:id="@+id/edit_advances"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Avances"
+                android:inputType="textMultiLine" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -206,19 +206,13 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/image_stage_three"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_menu_gallery" />
-
                 <TextView
                     android:id="@+id/text_label_obstacles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Obstáculos" />
+                    android:text="Obstáculos"
+                    android:textColor="@color/colorPrimary" />
 
             </LinearLayout>
 
@@ -226,16 +220,18 @@
                 android:id="@+id/text_obstacles_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Indica cambios negativos, retrocesos o dificultades específicas. Reflexiona, por ejemplo, si los problemas surgieron en razón de una condición aislada y por lo tanto momentánea o si es algo más bien permanente. (No siempre todo sale como lo planeado y eso es normal. Lo importante es reflexionar sobre estos acontecimientos para poder buscar soluciones)." />
 
             <EditText
                 android:id="@+id/edit_obstacles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Obstáculos"
+                android:inputType="textMultiLine" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,19 +239,14 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/image_stage_four"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_menu_gallery" />
-
                 <TextView
                     android:id="@+id/text_label_new_ideas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Obstáculos" />
+                    android:text="Nuevas Ideas"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -263,16 +254,18 @@
                 android:id="@+id/text_new_ideas_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Indica en este espacio alguna idea que pueda ayudar en la próxima actividad. Por ejemplo, ¿qué se puede mejorar?, ¿cómo se podría trabajar/enfrentar los obstáculos en una próxima evento/clase?, ¿cómo obtener provecho de los obstáculos y/o oportunidades que surgieron? (Este tipo de reflexión es importante porque te ayuda a pensar cómo puedes ir mejorando tus estrategias para ¡lograr tus objetivos!)." />
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/edit_new_ideas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Nuevas Ideas"
+                android:inputType="textMultiLine" />
 
         </LinearLayout>
     </ScrollView>

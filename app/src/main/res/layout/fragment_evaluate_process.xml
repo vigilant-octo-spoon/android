@@ -7,14 +7,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_left"
+        android:paddingRight="@dimen/margin_right">
 
 
         <TextView
             android:id="@+id/text_evaluation_instructions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Con la finalidad de rescatar los aprendizajes derivados de esta experiencia, te invitamos a completar el siguiente cuadro con un breve análisis de cada uno de los pasos seguidos hasta ahora. Invita a todos los miembros de tu equipo a realizar un ejercicio similar para tener una visión conjunta de lo logrado en la iniciativa. Este momento de reflexión es fundamental para hacer ajustes y mejorar el proyecto de cara a un nuevo ciclo." />
 
         <TextView
             android:id="@+id/text_label_title_one"
@@ -55,9 +59,9 @@
                 android:paddingBottom="16dp"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"
-                android:text="TextView"
+                android:text="¿Lograste conectar las metodologías con las necesidades y desafíos de tu escuela?, ¿en qué se notó?"
                 android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <EditText
@@ -65,8 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Conectar"
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,9 +98,9 @@
                 android:paddingBottom="16dp"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"
-                android:text="TextView"
+                android:text="¿La decisión respondió a las necesidades de tu contexto?"
                 android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <EditText
@@ -104,8 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Elegir"
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -133,9 +137,9 @@
                 android:paddingBottom="16dp"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp"
-                android:text="TextView"
+                android:text="¿La planificación fue clara y comprensiva en cuanto a los recursos, tiempos y responsables que se requerían? Describe logros y espacios a mejorar."
                 android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <EditText
@@ -143,8 +147,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Planificar"
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -180,8 +184,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textMultiLine" />
 
         <TextView
             android:id="@+id/textView16"
@@ -196,8 +199,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textMultiLine" />
 
         <TextView
             android:id="@+id/textView15"
@@ -212,8 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:inputType="textMultiLine" />
 
     </LinearLayout>
 
