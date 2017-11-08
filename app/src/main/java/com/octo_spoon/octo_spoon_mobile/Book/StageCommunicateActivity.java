@@ -23,9 +23,7 @@ public class StageCommunicateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_communicate);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Comunicar");
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Comunicar");
 
         editComments = (EditText) findViewById(R.id.edit_communicate);
 

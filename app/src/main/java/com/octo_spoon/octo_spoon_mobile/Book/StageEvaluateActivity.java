@@ -41,9 +41,7 @@ public class StageEvaluateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_evaluate);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Evaluar");
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Evaluar");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -57,12 +55,6 @@ public class StageEvaluateActivity extends AppCompatActivity {
 
         fabToCommunicate = (FloatingActionButton) findViewById(R.id.fab_to_communicate);
         setFabToCommunicateListener();
-        fabToCommunicate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
     }
 
     public void setFabToCommunicateListener(){

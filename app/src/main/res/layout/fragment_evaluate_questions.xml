@@ -1,14 +1,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="60dp"
     tools:context="com.octo_spoon.octo_spoon_mobile.Book.EvaluateQuestionsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_left"
+        android:paddingRight="@dimen/margin_right">
 
         <TextView
             android:id="@+id/text_title_two"
@@ -28,13 +31,6 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/image_stage_one"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_menu_gallery" />
-
             <TextView
                 android:id="@+id/text_label_observ"
                 android:layout_width="wrap_content"
@@ -50,28 +46,23 @@
             android:id="@+id/text_reflexion_step_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Invita a tu audiencia (estudiantes, pares, equipo directivos, apoderados, etcétera) a una conversación sobre los aprendizajes de la experiencia. \nCrea un clima de confianza para obtener opiniones auténticas que puedan ayudar a mejorar el proyecto a futuro. \nAnaliza las opiniones junto a tu equipo y utiliza este feedback para mejorar." />
 
         <EditText
             android:id="@+id/edit_reflexion_step_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Reflexiones"
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/image_stage_two"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_menu_gallery" />
 
             <TextView
                 android:id="@+id/text_label_step_two"
@@ -89,27 +80,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Invita a tu audiencia (estudiantes, docentes, equipo directivos, apoderados, etcétera) a que libre y anónimamente (si lo desean) expresen sus opiniones acerca de la iniciativa realizada.\nAnaliza estas propuestas a la luz de la mejora de tu iniciativa." />
 
         <EditText
             android:id="@+id/edit_reflexion_step_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Sugerencias"
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/image_stage_three"
-                app:srcCompat="@drawable/ic_menu_gallery"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/text_label_reflexion_step_three"
@@ -127,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Construye un set de preguntas (cerrada y/o abiertas) que apunten a conocer la percepción de satisfacción de tu audiencia respecto al proyecto realizado.\nPrioriza las preguntas que aporten información sobre lo más relevante para la mejora de tu proyecto. E incluye sugerencias para una nueva versión.\nAnaliza las respuestas e incluye estas las opiniones para afinar la realización de tu proyecto." />
 
         <TextView
             android:id="@+id/text_label_reflexion_step_three_questions"
@@ -142,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="¿Cómo han sido las últimas clases?\n\n¿Qué cosas nuevas hicieron que antes no se hacían?\n\n¿Qué les pareció esta manera enseñar y aprender?, ¿qué fue lo que más les gustó?, ¿qué fue lo que menos les gustó?\n\n¿Creen que las actividades les gustaron a sus otros compañeros?, ¿por qué sí y por qué no?" />
 
         <TextView
             android:id="@+id/text_label_reflexion_step_three_examples"
@@ -157,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="¿Qué fue lo más interesante y lo menos interesante de esta iniciativa/metodología?\n\n¿Cuáles fueron los principales facilitadores y las dificultades que afectaron el desarrollo de las actividades?\n\n¿Consideran que trabajaron colaborativamente/en red?, ¿por qué?\n\n¿Qué dificultades y fortalezas tuvieron en el trabajo en equipo?" />
 
 
     </LinearLayout>
