@@ -22,19 +22,18 @@ import java.net.URL;
  * Created by ESTEBANFML on 09-11-2017.
  */
 
-public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
+public class PostReportTask extends AsyncTask<String, Void, Boolean> {
 
     private DBHelper vosdb;
-    private String condition_item, condition_info;
+    private String comment;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
 
-    public PostConditionTask(DBHelper _vosdb, String condition_item, String condition_info,
-                             Context context) {
+    public PostReportTask(DBHelper _vosdb, String comment,
+                            Context context) {
         this.vosdb = _vosdb;
-        this.condition_item = condition_item;
-        this.condition_info = condition_info;
+        this.comment = comment;
         this.context = context;
     }
 
@@ -49,7 +48,7 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
                     context.getResources().getString(R.string.user_methodology_api_url) +
                     "1/" +
-                    context.getResources().getString(R.string.user_methodology_condition_url));
+                    context.getResources().getString(R.string.user_methodology_report_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -64,8 +63,7 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("item", condition_item);
-            body.put("info", condition_info);
+            body.put("comment", comment);
 
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
@@ -86,10 +84,10 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idCondition = jsonTemp.getString("idCondition");
+                String idReport = jsonTemp.getString("idReport");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", "PostConditionTask" + Integer.toString(HttpResult));
+                Log.i("HTTPE", "PostReportTask" +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }

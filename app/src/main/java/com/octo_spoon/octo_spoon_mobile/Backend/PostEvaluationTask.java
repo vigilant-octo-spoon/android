@@ -96,7 +96,7 @@ public class PostEvaluationTask extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idWorkRole = jsonTemp.getString("idWorkRole");
+                String idEvaluation = jsonTemp.getString("idEvaluation");
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "POSTEVALUATIONTASK " +  Integer.toString(HttpResult));

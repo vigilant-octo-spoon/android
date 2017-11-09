@@ -90,7 +90,7 @@ public class PostResourceTask extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idWorkRole = jsonTemp.getString("idWorkRole");
+                String idResource = jsonTemp.getString("idResource");
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostResourceTask" +  Integer.toString(HttpResult));

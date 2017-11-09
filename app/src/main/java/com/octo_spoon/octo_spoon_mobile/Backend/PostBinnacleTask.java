@@ -99,7 +99,7 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idWorkRole = jsonTemp.getString("idWorkRole");
+                String idBinnacle = jsonTemp.getString("idBinnacle");
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "POSTBINNACLETASK " +  Integer.toString(HttpResult));

@@ -90,7 +90,7 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idWorkRole = jsonTemp.getString("idWorkRole");
+                String idBroadcast = jsonTemp.getString("idBroadcast");
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));
