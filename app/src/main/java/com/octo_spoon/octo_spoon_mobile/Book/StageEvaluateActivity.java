@@ -93,7 +93,7 @@ public class StageEvaluateActivity extends AppCompatActivity {
                             StageEvaluateActivity.this
                     ).execute();
                 } catch (Exception e) {
-                    Toast.makeText(StageImplementationActivity.this, "No se logró grabar la evaluación", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StageEvaluateActivity.this, "No se logró grabar la evaluación", Toast.LENGTH_SHORT).show();
 
                 }
 
