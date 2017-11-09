@@ -1,10 +1,11 @@
 package com.octo_spoon.octo_spoon_mobile.Backend;
 
 import android.content.Context;
-
-import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.octo_spoon.octo_spoon_mobile.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,43 +18,43 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
-import com.octo_spoon.octo_spoon_mobile.LoginActivity;
-import com.octo_spoon.octo_spoon_mobile.MainActivity;
-import com.octo_spoon.octo_spoon_mobile.R;
-
 /**
- * Created by Pablo on 18/10/2017
+ * Created by ESTEBANFML on 09-11-2017.
  */
-public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
+
+public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
 
     private DBHelper vosdb;
-    private String username, password;
+    private String condition_item, condition_info;
     private Exception exception;
-    private Context contextApp;
-    private LoginActivity la;
+    private Context context;
     private SessionManager sessionManager;
 
-    public AuthorizeUser(DBHelper _vosdb, String _username, String _password, Context _context, LoginActivity _la) {
+    public PostConditionTask(DBHelper _vosdb, String condition_item, String condition_info,
+                             Context context) {
         this.vosdb = _vosdb;
-        this.username = _username;
-        this.password = _password;
-        this.contextApp = _context;
-        this.la = _la;
+        this.condition_item = condition_item;
+        this.condition_info = condition_info;
+        this.context = context;
     }
 
     protected void onPreExecute() {
-        sessionManager = new SessionManager(contextApp);
-        la.showProgress(true);
+        //stagePlanificationActivity.showProgress(true);
+        sessionManager = new SessionManager(context);
+
     }
 
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(contextApp.getResources().getString(R.string.main_api_url) + contextApp.getResources().getString(R.string.auth_api_url));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) +
+                    context.getResources().getString(R.string.user_methodology_api_url) +
+                    "1/" +
+                    context.getResources().getString(R.string.user_methodology_condition_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("Authorization", "1");
+            Cursor user = vosdb.getCurrentUser();
+            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -63,8 +64,8 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("email", username);
-            body.put("password", password);
+            body.put("item", condition_item);
+            body.put("info", condition_info);
 
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
@@ -82,18 +83,13 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
                 }
                 br.close();
 
-                vosdb.clearDB("apikeys");
+                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
-                String apikey = jsonTemp.getString("authentication_token");
-                String email = jsonTemp.getString("email");
-                //String firstname = jsonTemp.getString("firstname");
-                //String lastname = jsonTemp.getString("lastname");
-
-                sessionManager.saveLogInData(apikey);
-                vosdb.insertApikey(apikey,null,null,email);
+                String message = jsonTemp.getString("message");
+                String idCondition = jsonTemp.getString("idCondition");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", Integer.toString(HttpResult));
+                Log.i("HTTPE", "PostConditionTask" + Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
@@ -112,16 +108,17 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean response) {
-        la.showProgress(false);
+        /*
+        stagePlanificationActivity.showProgress(false);
         if (response) {
-            Intent intent = new Intent(contextApp, MainActivity.class);
-            contextApp.startActivity(intent);
+            Intent intent = new Intent(context, MainActivity.class);
+            context.startActivity(intent);
 
         } else {
-            la.mEmailView.setError(contextApp.getString(R.string.failed_credentials));
-            la.mEmailView.requestFocus();
+            stagePlanificationActivity.mEmailView.setError(context.getString(R.string.failed_credentials));
+            stagePlanificationActivity.mEmailView.requestFocus();
         }
-        la.mUserAuth = null;
+        stagePlanificationActivity.mUserAuth = null;*/
     }
 
 }

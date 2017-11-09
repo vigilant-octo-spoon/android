@@ -107,8 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textMultiLine"
-                android:text="Name" />
+                android:hint="Indica los cambios"
+                android:inputType="textMultiLine" />
 
             <LinearLayout
                 android:layout_width="match_parent"

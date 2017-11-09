@@ -10,11 +10,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
+import com.octo_spoon.octo_spoon_mobile.Backend.PostEvaluationTask;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 import java.util.List;
@@ -32,8 +33,10 @@ public class StageEvaluateActivity extends AppCompatActivity {
     private EditText editProcessImplementToImprove;
     private EditText editProcessImplementToScale;
 
-    private EditText editUsersReflexion;
+    private EditText editUsersReflection;
     private EditText editUsersSuggestions;
+
+    private DBHelper vosdb;
 
 
     @Override
@@ -45,6 +48,8 @@ public class StageEvaluateActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        vosdb = new DBHelper(this);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -71,10 +76,27 @@ public class StageEvaluateActivity extends AppCompatActivity {
                 editProcessImplementToImprove = fragments.get(0).getView().findViewById(R.id.edit_step_four_second);
                 editProcessImplementToScale = fragments.get(0).getView().findViewById(R.id.edit_step_four_third);
 
-                editUsersReflexion = fragments.get(1).getView().findViewById(R.id.edit_reflexion_step_one);
+                editUsersReflection = fragments.get(1).getView().findViewById(R.id.edit_reflexion_step_one);
                 editUsersSuggestions = fragments.get(1).getView().findViewById(R.id.edit_reflexion_step_two);
 
-                // TODO: 07-11-2017 API REQUEST
+                try {
+                    new PostEvaluationTask(
+                            vosdb,
+                            editProcessConnect.getText().toString(),
+                            editProcessChoose.getText().toString(),
+                            editProcessPlan.getText().toString(),
+                            editProcessImplementWorked.getText().toString()+";"+
+                            editProcessImplementToImprove.getText().toString()+";"+
+                            editProcessImplementToScale.getText().toString(),
+                            editUsersReflection.getText().toString(),
+                            editUsersSuggestions.getText().toString(),
+                            StageEvaluateActivity.this
+                    ).execute();
+                } catch (Exception e) {
+                    Toast.makeText(StageEvaluateActivity.this, "No se logró grabar la evaluación", Toast.LENGTH_SHORT).show();
+
+                }
+
                 startActivity(StageCommunicateActivity.getIntent(StageEvaluateActivity.this));
 
             }
