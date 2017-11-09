@@ -30,6 +30,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     private Context contextApp;
     private MethodologyFragment mf;
     private CurrentInformationHelper db;
+    private SessionManager sessionManager;
 
     public FetchUserMethodologies(DBHelper _vosdb, Context _context, MethodologyFragment _mf) {
         this.vosdb = _vosdb;
@@ -38,6 +39,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     protected void onPreExecute() {
+        sessionManager = new SessionManager(contextApp);
         System.out.println("PSD: Show progress");
         mf.showProgress(true);
     }
@@ -49,7 +51,7 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("Authorization", vosdb.getCurrentApikey());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -67,7 +69,6 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-
                 vosdb.clearEntireDB();
                 db = CurrentInformationHelper.getInstance();
                 JSONObject jsonInit = new JSONObject(sb.toString());
@@ -130,16 +131,22 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
     }
 
     private int saveFollows(JSONObject currentMethodology, int i) throws JSONException {
+        int step;
+        try {
+            step = currentMethodology.getInt("step");
+        } catch (Exception e) {
+            step = 3;
+        }
         vosdb.insertFollow(
                 currentMethodology.getInt("id"),
                 currentMethodology.getString("name"),
-                currentMethodology.getInt("step")
+                step
         );
         //Display follows
         Methodology mL = new Methodology(
                 currentMethodology.getInt("id"),
                 currentMethodology.getString("name"),
-                currentMethodology.getInt("step")
+                step
         );
         db.userMethodologies.add(mL);
         return currentMethodology.getInt("id");
@@ -159,69 +166,94 @@ public class FetchUserMethodologies extends AsyncTask<String, Void, Boolean> {
 
     private void saveWorkRoles(JSONArray work_roles, int meth_id) throws JSONException {
         for (int j = 0; j < work_roles.length(); j++) {
-            JSONObject workRole = work_roles.getJSONObject(j);
-            vosdb.insertWorkRole(
-                    workRole.getInt("id"),
-                    meth_id,
-                    workRole.getString("name"),
-                    workRole.getString("role")
-            );
+            try {
+                JSONObject workRole = work_roles.getJSONObject(j);
+                vosdb.insertWorkRole(
+                        workRole.getInt("id"),
+                        meth_id,
+                        workRole.getString("name"),
+                        workRole.getString("role")
+                );
+            } catch (Exception e) {
+                Log.i("PSD: Error Work Role ", e.toString());
+                continue;
+            }
         }
     }
 
     private void saveBroadcasts(JSONArray broadcasts, int meth_id) throws JSONException{
         for (int j = 0; j < broadcasts.length(); j++) {
-            JSONObject broadcast = broadcasts.getJSONObject(j);
-            vosdb.insertBroadcast(
-                    broadcast.getInt("id"),
-                    meth_id,
-                    broadcast.getString("moment_of_implementation"),
-                    broadcast.getString("audience"),
-                    broadcast.getString("diffusion_channel"),
-                    broadcast.getString("objective")
-            );
+            try {
+                JSONObject broadcast = broadcasts.getJSONObject(j);
+                vosdb.insertBroadcast(
+                        broadcast.getInt("id"),
+                        meth_id,
+                        broadcast.getString("moment_of_implementation"),
+                        broadcast.getString("audience"),
+                        broadcast.getString("diffusion_channel"),
+                        broadcast.getString("objective")
+                );
+            } catch (Exception e) {
+                Log.i("PSD: Error Broadcast ", e.toString());
+                continue;
+            }
         }
     }
 
     private void saveConditions(JSONArray conditions, int meth_id) throws JSONException {
         for (int j = 0; j < conditions.length(); j++) {
-            JSONObject condition = conditions.getJSONObject(j);
-            vosdb.insertCondition(
-                    condition.getInt("id"),
-                    meth_id,
-                    condition.getString("item"),
-                    condition.getString("info")
-            );
+            try {
+                JSONObject condition = conditions.getJSONObject(j);
+                vosdb.insertCondition(
+                        condition.getInt("id"),
+                        meth_id,
+                        condition.getString("item"),
+                        condition.getString("info")
+                );
+            } catch (Exception e) {
+                Log.i("PSD: Error Condition ", e.toString());
+                continue;
+            }
         }
     }
 
     private void saveResources(JSONArray resources, int meth_id) throws JSONException {
         for (int j = 0; j < resources.length(); j++) {
             JSONObject resource = resources.getJSONObject(j);
-            vosdb.insertResource(
-                    resource.getInt("id"),
-                    meth_id,
-                    resource.getString("item"),
-                    resource.getBoolean("available"),
-                    resource.getString("acquisition")
-            );
+            try {
+                vosdb.insertResource(
+                        resource.getInt("id"),
+                        meth_id,
+                        resource.getString("item"),
+                        resource.getBoolean("available"),
+                        resource.getString("acquisition")
+                );
+            } catch (Exception e) {
+                Log.i("PSD: Error Resource ", e.toString());
+                continue;
+            }
         }
     }
 
     private void saveBinnacles(JSONArray binnacles, int meth_id) throws JSONException {
         for (int j = 0; j < binnacles.length(); j++) {
             JSONObject binnacle = binnacles.getJSONObject(j);
-            vosdb.insertBinnacle(
-                    binnacle.getInt("id"),
-                    meth_id,
-                    binnacle.getString("start_date"),
-                    binnacle.getString("finish_date"),
-                    binnacle.getString("objectives"),
-                    binnacle.getString("observations"),
-                    binnacle.getString("advances"),
-                    binnacle.getString("obstacles"),
-                    binnacle.getString("ideas")
-            );
+            try {
+                vosdb.insertBinnacle(
+                        binnacle.getInt("id"),
+                        meth_id,
+                        binnacle.getString("start_date"),
+                        binnacle.getString("finish_date"),
+                        binnacle.getString("objectives"),
+                        binnacle.getString("observations"),
+                        binnacle.getString("advances"),
+                        binnacle.getString("obstacles"),
+                        binnacle.getString("ideas")
+                );
+            } catch (Exception e) {
+                Log.i("PSD: Error Binnacle ", e.toString());
+                continue;
+            }
         }
     }
 

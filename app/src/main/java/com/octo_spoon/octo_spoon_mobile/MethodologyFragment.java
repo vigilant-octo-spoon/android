@@ -70,7 +70,7 @@ public class MethodologyFragment extends Fragment {
         emptyText.setTextColor(Color.DKGRAY);
         mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
         lv_methodologies.setAdapter(mla);
-        Log.i("SIZE",Integer.toString(db.userMethodologies.size()));
+        Log.i("PSD SIZE",Integer.toString(db.userMethodologies.size()));
 
         if (db.userMethodologies.size() == 0) {
             showProgress(true);

@@ -86,6 +86,7 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String apikey = jsonTemp.getString("authentication_token");
                 String email = jsonTemp.getString("email");
+                Log.i("PSD_apikey", apikey);
                 //String firstname = jsonTemp.getString("firstname");
                 //String lastname = jsonTemp.getString("lastname");
 
