@@ -35,6 +35,11 @@ public class SessionManager {
         editor.apply();
     }
 
+    public void eraseSharedPreferences() {
+        editor.clear();
+        editor.apply();
+    }
+
     public Boolean isLoggedIn() {
         return sharedPreferences.contains(context.getResources().getString(R.string.sp_token));
     }

@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
+import com.octo_spoon.octo_spoon_mobile.Backend.SessionManager;
 import com.octo_spoon.octo_spoon_mobile.Book.BookStartActivity;
 import com.octo_spoon.octo_spoon_mobile.Book.StageCommunicateActivity;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     private DBHelper vosdb;
     private NavigationView navigationView;
     private TextView mUserName, mUserMail;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity
         vosdb = new DBHelper(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        sessionManager = new SessionManager(MainActivity.this);
 
         getSupportActionBar().setTitle(getString(R.string.my_methodologies_header));
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -125,6 +129,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(BookStartActivity.getIntent(MainActivity.this));
 
         } else if (id == R.id.logout) {
+            sessionManager.eraseSharedPreferences();
+            startActivity(LoginActivity.getIntent(MainActivity.this));
 
         }
 

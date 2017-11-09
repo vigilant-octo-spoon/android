@@ -73,7 +73,7 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
             StringBuilder sb = new StringBuilder();
             String result = urlConnection.getResponseMessage();
             int HttpResult = urlConnection.getResponseCode();
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
+            if (HttpResult == HttpURLConnection.HTTP_OK || HttpResult == HttpURLConnection.HTTP_CREATED) {
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;
@@ -86,11 +86,11 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String apikey = jsonTemp.getString("authentication_token");
                 String email = jsonTemp.getString("email");
-                String firstname = jsonTemp.getString("firstname");
-                String lastname = jsonTemp.getString("lastname");
+                //String firstname = jsonTemp.getString("firstname");
+                //String lastname = jsonTemp.getString("lastname");
 
                 sessionManager.saveLogInData(apikey);
-                vosdb.insertApikey(apikey,firstname,lastname,email);
+                vosdb.insertApikey(apikey,null,null,email);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", Integer.toString(HttpResult));
