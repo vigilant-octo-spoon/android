@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.AuthorizeUser;
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
+import com.octo_spoon.octo_spoon_mobile.Backend.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +49,19 @@ public class LoginActivity extends AppCompatActivity {
     public EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sessionManager = new SessionManager(LoginActivity.this);
+
+        if (sessionManager.isLoggedIn()){
+            Log.i("TOKEN",sessionManager.getToken());
+            startActivity(MainActivity.getIntent(LoginActivity.this));
+        }
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -80,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
+
         if (mUserAuth != null) {
             return;
         }

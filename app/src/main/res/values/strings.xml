@@ -31,8 +31,13 @@
     <string name="hello_blank_fragment">Dummy</string>
 
     <!-- Strings for API text -->
-    <string name="main_api_url">https://private-edb58d-iic2113.apiary-mock.com/</string>
+    <string name="main_api_url">https://red-lab-sur.herokuapp.com/</string>
     <string name="auth_api_url">sessions</string>
+    <string name="follows_id_1_follow_planning">follows/1/planning/</string>
+    <string name="follows_id_1_follow_work_roles">follows/1/work_roles/</string>
+    <string name="sp_user_id">user_id</string>
+    <string name="sp_token">token</string>
+    <string name="sp_db_name">redlabsur</string>
     <string name="user_methodology_api_url">follows</string>
     <string name="title_activity_main">MainActivity</string>
 
