@@ -22,20 +22,21 @@ import java.net.URL;
  * Created by ESTEBANFML on 09-11-2017.
  */
 
-public class PostRoles  extends AsyncTask<String, Void, Boolean> {
+public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
 
-    // TODO: 09-11-2017 BUG 404 EN ESTE REQUEST
     private DBHelper vosdb;
-    private String team_member_name, team_member_role;
+    private String moment_of_implementation, audience,diffusion_channel , objective;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
 
-    public PostRoles(DBHelper _vosdb, String team_member_name, String team_member_role,
-                         Context context) {
+    public PostBroadcastTask(DBHelper _vosdb, String moment_of_implementation, String audience, String diffusion_channel, String objective,
+                             Context context) {
         this.vosdb = _vosdb;
-        this.team_member_name = team_member_name;
-        this.team_member_role = team_member_role;
+        this.moment_of_implementation = moment_of_implementation;
+        this.audience = audience;
+        this.diffusion_channel = diffusion_channel;
+        this.objective = objective;
         this.context = context;
     }
 
@@ -48,7 +49,10 @@ public class PostRoles  extends AsyncTask<String, Void, Boolean> {
     protected Boolean doInBackground(String... strings) {
         try {
             // TODO: 08-11-2017 change methodology 1
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.follows_id_1_follow_work_roles));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) +
+                    context.getResources().getString(R.string.user_methodology_api_url) +
+                    "1" +
+                    context.getResources().getString(R.string.user_methodology_condition_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -63,8 +67,10 @@ public class PostRoles  extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("initiative_name", team_member_name);
-            body.put("objective", team_member_role);
+            body.put("moment_of_implementation", moment_of_implementation);
+            body.put("audience", audience);
+            body.put("diffusion_channel", diffusion_channel);
+            body.put("objective", objective);
 
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
@@ -73,7 +79,7 @@ public class PostRoles  extends AsyncTask<String, Void, Boolean> {
             StringBuilder sb = new StringBuilder();
             String result = urlConnection.getResponseMessage();
             int HttpResult = urlConnection.getResponseCode();
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
+            if (HttpResult == HttpURLConnection.HTTP_OK || HttpResult == HttpURLConnection.HTTP_CREATED) {
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
                 String line = null;
@@ -88,7 +94,7 @@ public class PostRoles  extends AsyncTask<String, Void, Boolean> {
                 String idWorkRole = jsonTemp.getString("idWorkRole");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", Integer.toString(HttpResult));
+                Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
@@ -119,4 +125,6 @@ public class PostRoles  extends AsyncTask<String, Void, Boolean> {
         }
         stagePlanificationActivity.mUserAuth = null;*/
     }
+
+
 }

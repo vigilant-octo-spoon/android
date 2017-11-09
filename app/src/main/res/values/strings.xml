@@ -38,7 +38,9 @@
     <string name="sp_user_id">user_id</string>
     <string name="sp_token">token</string>
     <string name="sp_db_name">redlabsur</string>
-    <string name="user_methodology_api_url">follows</string>
+    <string name="user_methodology_api_url">follows/</string>
+    <string name="user_methodology_condition_url">condition/</string>
+    <string name="user_methodology_resource_url">resource/</string>
     <string name="title_activity_main">MainActivity</string>
 
     <!-- Strings for methodology buttons -->

@@ -35,50 +35,185 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edit_resources_1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, Disponible, Obtención"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_resources_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, Disponible, Obtención"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/edit_resources_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/edit_resources_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, Disponible, Obtención"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/edit_resources_av_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Disponible"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/edit_resources_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, Disponible, Obtención"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/edit_resources_item_obt_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Obtención"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_resources_5"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, Disponible, Obtención"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_resources_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_av_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Disponible"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_item_obt_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Obtención"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_resources_item_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_av_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Disponible"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_item_obt_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Obtención"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_resources_item_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_av_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Disponible"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_item_obt_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Obtención"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_resources_item_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_av_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Disponible"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_resources_item_obt_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Obtención"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView22"
@@ -98,50 +233,140 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edit_other_conditions_1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, como lo favorecemos"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edit_other_conditions_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, como lo favorecemos"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/edit_condition_item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/edit_other_conditions_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, como lo favorecemos"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/edit_condition_info_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Como lo favorecemos"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/edit_other_conditions_4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, como lo favorecemos"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/edit_other_conditions_5"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ítem, como lo favorecemos"
-            android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_condition_item_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_condition_info_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Como lo favorecemos"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_condition_item_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_condition_info_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Como lo favorecemos"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_condition_item_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_condition_info_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Como lo favorecemos"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edit_condition_item_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Ítem"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_condition_info_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Como lo favorecemos"
+                android:inputType="textMultiLine"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/text_plan_title_three"

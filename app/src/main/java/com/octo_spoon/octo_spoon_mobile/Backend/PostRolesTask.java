@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.octo_spoon.octo_spoon_mobile.Book.StagePlanificationActivity;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 import org.json.JSONException;
@@ -20,39 +19,36 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ESTEBANFML on 07-11-2017.
+ * Created by ESTEBANFML on 09-11-2017.
  */
 
-public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
+public class PostRolesTask extends AsyncTask<String, Void, Boolean> {
 
+    // TODO: 09-11-2017 BUG 404 EN ESTE REQUEST
     private DBHelper vosdb;
-    private String initiativeName, objective, place, startDate, finishDate;
+    private String team_member_name, team_member_role;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
 
-    // TODO: 09-11-2017 ERROR 500
-    public PostPlanningTask(DBHelper _vosdb, String initiativeName, String objective,
-                            //String place, String startDate, String finishDate, Context context, StagePlanificationActivity stagePlanificationActivity) {
-                            String place, String startDate, String finishDate, Context context) {
+    public PostRolesTask(DBHelper _vosdb, String team_member_name, String team_member_role,
+                         Context context) {
         this.vosdb = _vosdb;
-        this.initiativeName = initiativeName;
-        this.objective = objective;
-        this.place = place;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+        this.team_member_name = team_member_name;
+        this.team_member_role = team_member_role;
         this.context = context;
     }
 
     protected void onPreExecute() {
         //stagePlanificationActivity.showProgress(true);
         sessionManager = new SessionManager(context);
+
     }
 
     protected Boolean doInBackground(String... strings) {
         try {
             // TODO: 08-11-2017 change methodology 1
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.follows_id_1_follow_planning));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.follows_id_1_follow_work_roles));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -67,14 +63,11 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("initiative_name", initiativeName);
-            body.put("objective", objective);
-            body.put("place", place);
-            body.put("start_date", startDate);
+            body.put("initiative_name", team_member_name);
+            body.put("objective", team_member_role);
+
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
-            body.put("finish_date", finishDate);
-
             wr.flush();
 
             StringBuilder sb = new StringBuilder();
@@ -92,10 +85,10 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
                 //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idPlanning = jsonTemp.getString("idPlanning");
+                String idWorkRole = jsonTemp.getString("idWorkRole");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", "PostPlanningTask" + Integer.toString(HttpResult));
+                Log.i("HTTPE", "PostResourcesTask" +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
