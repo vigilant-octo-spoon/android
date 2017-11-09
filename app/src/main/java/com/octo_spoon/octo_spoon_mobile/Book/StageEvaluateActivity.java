@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.PostEvaluationTask;
@@ -91,7 +92,10 @@ public class StageEvaluateActivity extends AppCompatActivity {
                             editUsersSuggestions.getText().toString(),
                             StageEvaluateActivity.this
                     ).execute();
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    Toast.makeText(StageImplementationActivity.this, "No se logró grabar la evaluación", Toast.LENGTH_SHORT).show();
+
+                }
 
                 startActivity(StageCommunicateActivity.getIntent(StageEvaluateActivity.this));
 
