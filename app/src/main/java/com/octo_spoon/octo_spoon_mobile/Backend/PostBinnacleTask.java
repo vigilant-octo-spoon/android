@@ -22,21 +22,26 @@ import java.net.URL;
  * Created by ESTEBANFML on 09-11-2017.
  */
 
-public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
+public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
 
+    // TODO: 09-11-2017 ERROR 404
     private DBHelper vosdb;
-    private String moment_of_implementation, audience,diffusion_channel , objective;
+    private String start_date, audience,finish_date , objectives, observations, advances, obstacles, ideas;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
 
-    public PostBroadcastTask(DBHelper _vosdb, String moment_of_implementation, String audience, String diffusion_channel, String objective,
+    public PostBinnacleTask(DBHelper _vosdb, String start_date, String finish_date, String objectives,
+                            String observations, String advances,  String obstacles,  String ideas,
                              Context context) {
         this.vosdb = _vosdb;
-        this.moment_of_implementation = moment_of_implementation;
-        this.audience = audience;
-        this.diffusion_channel = diffusion_channel;
-        this.objective = objective;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
+        this.objectives = objectives;
+        this.observations = observations;
+        this.advances = advances;
+        this.obstacles = obstacles;
+        this.ideas = ideas;
         this.context = context;
     }
 
@@ -52,7 +57,7 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
                     context.getResources().getString(R.string.user_methodology_api_url) +
                     "1" +
-                    context.getResources().getString(R.string.user_methodology_broadcast_url));
+                    context.getResources().getString(R.string.user_methodology_binnacle_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -67,10 +72,13 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("moment_of_implementation", moment_of_implementation);
-            body.put("audience", audience);
-            body.put("diffusion_channel", diffusion_channel);
-            body.put("objective", objective);
+            body.put("start_date", start_date);
+            body.put("finish_date", finish_date);
+            body.put("objectives", objectives);
+            body.put("observations", observations);
+            body.put("advances", advances);
+            body.put("obstacles", obstacles);
+            body.put("ideas", ideas);
 
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
@@ -94,7 +102,7 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
                 String idWorkRole = jsonTemp.getString("idWorkRole");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));
+                Log.i("HTTPE", "POSTBINNACLETASK " +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
@@ -125,6 +133,5 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
         }
         stagePlanificationActivity.mUserAuth = null;*/
     }
-
 
 }
