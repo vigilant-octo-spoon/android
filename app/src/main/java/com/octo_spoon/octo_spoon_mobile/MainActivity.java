@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.logout) {
             sessionManager.eraseSharedPreferences();
-            startActivity(LoginActivity.getIntent(MainActivity.this));
+            this.finish();
 
         }
 
