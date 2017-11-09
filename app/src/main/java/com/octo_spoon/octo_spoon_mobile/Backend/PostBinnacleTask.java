@@ -56,7 +56,7 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
             // TODO: 08-11-2017 change methodology 1
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
                     context.getResources().getString(R.string.user_methodology_api_url) +
-                    "1" +
+                    "1/" +
                     context.getResources().getString(R.string.user_methodology_binnacle_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
