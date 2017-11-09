@@ -1,10 +1,12 @@
 package com.octo_spoon.octo_spoon_mobile.Adapters;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,10 +45,37 @@ public class MethodologyListAdapter extends ArrayAdapter<Methodology> {
         }
 
         // Referencias UI.
-        TextView fileName = (TextView) convertView.findViewById(R.id.textView_methodologyTitle);
-        ImageView fileIcon = (ImageView) convertView.findViewById(R.id.imageView_methodologyIcon);
+        TextView fileName = convertView.findViewById(R.id.textView_methodologyTitle);
+        Button button1 = convertView.findViewById(R.id.plan_button);
+        Button button2 = convertView.findViewById(R.id.impl_button);
+        Button button3 = convertView.findViewById(R.id.eval_button);
+        Button button4 = convertView.findViewById(R.id.comm_button);
 
         Methodology methodology = getItem(position);
+        //Set all button text to gray
+        button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        if (methodology.step >= 3) {
+            button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+        }
+        if (methodology.step >= 4) {
+            button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+        }
+        if (methodology.step >= 5) {
+            button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+        }
+        if (methodology.step >= 6) {
+            button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+        }
+        if (methodology.step >= 7) {
+            button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+        }
+
         /*
 
         if (documentFile.type.equals("folder") && !documentFile.id.equals("0")){
