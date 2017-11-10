@@ -10,12 +10,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.PostEvaluationTask;
+import com.octo_spoon.octo_spoon_mobile.Backend.UpdateStep;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 import java.util.List;
@@ -36,6 +39,9 @@ public class StageEvaluateActivity extends AppCompatActivity {
     private EditText editUsersReflection;
     private EditText editUsersSuggestions;
 
+    private int meth_id;
+    private boolean read_only  = false;
+
     private DBHelper vosdb;
 
 
@@ -43,6 +49,9 @@ public class StageEvaluateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_evaluate);
+
+        meth_id = getIntent().getIntExtra("meth_id", -1);;
+        read_only = getIntent().getBooleanExtra("read_only", false);
 
         getSupportActionBar().setTitle("Evaluar");
         // Create the adapter that will return a fragment for each of the three
@@ -60,6 +69,25 @@ public class StageEvaluateActivity extends AppCompatActivity {
 
         fabToCommunicate = (FloatingActionButton) findViewById(R.id.fab_to_communicate);
         setFabToCommunicateListener();
+
+        if (read_only) {
+            fillWithStoredValues();
+            removeEditingProperties();
+        }
+    }
+
+    private void fillWithStoredValues() {
+    }
+
+    private void removeEditingProperties() {
+        editProcessConnect.setInputType(InputType.TYPE_NULL);
+        editProcessChoose.setInputType(InputType.TYPE_NULL);
+        editProcessPlan.setInputType(InputType.TYPE_NULL);
+        editProcessImplementWorked.setInputType(InputType.TYPE_NULL);
+        editProcessImplementToImprove.setInputType(InputType.TYPE_NULL);
+        editProcessImplementToScale.setInputType(InputType.TYPE_NULL);
+        editUsersReflection.setInputType(InputType.TYPE_NULL);
+        editUsersSuggestions.setInputType(InputType.TYPE_NULL);
     }
 
     public void setFabToCommunicateListener(){
@@ -90,14 +118,20 @@ public class StageEvaluateActivity extends AppCompatActivity {
                             editProcessImplementToScale.getText().toString(),
                             editUsersReflection.getText().toString(),
                             editUsersSuggestions.getText().toString(),
-                            StageEvaluateActivity.this
+                            StageEvaluateActivity.this,
+                            meth_id
                     ).execute();
                 } catch (Exception e) {
                     Toast.makeText(StageEvaluateActivity.this, "No se logró grabar la evaluación", Toast.LENGTH_SHORT).show();
 
                 }
 
-                startActivity(StageCommunicateActivity.getIntent(StageEvaluateActivity.this));
+                try {
+                    new UpdateStep(vosdb, StageEvaluateActivity.this, meth_id).execute().get();
+                } catch (Exception e) {
+                    Log.i("error", e.toString());
+                }
+                StageEvaluateActivity.this.finish();
 
             }
         });

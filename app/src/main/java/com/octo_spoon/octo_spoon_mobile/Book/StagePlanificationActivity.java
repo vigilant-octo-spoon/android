@@ -276,7 +276,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.i("error",e.toString());
                     Toast.makeText(StagePlanificationActivity.this, "No se logró grabar la hoja de ruta", Toast.LENGTH_SHORT).show();
-                    return;
                 }
 
                 ArrayList<EditText> arrayEditNames = new ArrayList<EditText>();
@@ -306,7 +305,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.i("error",e.toString());
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a los usuarios en la hoja de ruta", Toast.LENGTH_SHORT).show();
-                            return;
                         }
                     }
                 }
@@ -346,7 +344,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.i("error",e.toString());
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a los recursos en la hoja de ruta", Toast.LENGTH_SHORT).show();
-                            return;
                         }
                     }
                 }
@@ -380,7 +377,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.i("error",e.toString());
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las condiciones en la hoja de ruta", Toast.LENGTH_SHORT).show();
-                            return;
                         }
                     }
                 }
@@ -416,7 +412,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.i("error",e.toString());
                     Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las instancias de difusión en la hoja de ruta", Toast.LENGTH_SHORT).show();
-                    return;
                 }
 
                 Log.i("aaa",editRouteSheetSelectedMethodology.getText().toString());
@@ -426,7 +421,6 @@ public class StagePlanificationActivity extends AppCompatActivity {
                     new UpdateStep(vosdb, StagePlanificationActivity.this, meth_id).execute().get();
                 } catch (Exception e) {
                     Log.i("error", e.toString());
-                    return;
                 }
                 StagePlanificationActivity.this.finish();
             }
