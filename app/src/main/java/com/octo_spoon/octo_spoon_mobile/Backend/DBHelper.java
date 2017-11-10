@@ -353,7 +353,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int getStep(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from follows were id=" + Integer.toString(id), null);
+        Cursor res = db.rawQuery("select * from follows where id=" + Integer.toString(id), null);
         res.moveToNext();
         return res.getInt(2);
     }
@@ -371,6 +371,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void clearEntireDB() {
+        System.out.println("PSD: clearing DB");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("follows", null, null);
         db.delete("methodologies", null, null);

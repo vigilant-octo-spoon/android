@@ -71,7 +71,6 @@ public class FetchAllMetodologies extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-                vosdb.clearEntireDB();
                 db = CurrentInformationHelper.getInstance();
                 JSONArray jsonTemp = new JSONArray(sb.toString());
                 for (int i = 0; i < jsonTemp.length(); i++) {

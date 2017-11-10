@@ -71,15 +71,17 @@ public class AllMethodologyListAdapter extends ArrayAdapter<AllMethodology> {
         button2.setClickable(false);
         button3.setClickable(false);
         button4.setClickable(false);
+        button1.setText(R.string.addMeth);
         button2.setVisibility(View.GONE);
         button3.setVisibility(View.GONE);
         button4.setVisibility(View.GONE);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    new FollowMethodology(new DBHelper(contextApp), contextApp, meth_id, methodology.title);
+                    System.out.println("PSD: About to do a follow");
+                    new FollowMethodology(new DBHelper(contextApp), contextApp, meth_id, methodology.title).execute();
                 } catch (Exception e) {
-                    Log.i("error", e.toString());
+                    System.out.println("PSD: Failure doing follow");
                 }
 
             }

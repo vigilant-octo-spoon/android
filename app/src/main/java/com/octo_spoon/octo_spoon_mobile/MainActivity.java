@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity
 
     private void processUserData() {
         Cursor res = vosdb.getCurrentUser();
-        mUserName.setText(res.getString(1) + " " + res.getString(2));
-        mUserMail.setText(res.getString(3));
+        mUserName.setText(res.getString(2) + " " + res.getString(3));
+        mUserMail.setText(res.getString(4));
     }
 
     @Override
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             sessionManager.eraseSharedPreferences();
+            vosdb.clearEntireDB();
             super.onBackPressed();
         }
     }
@@ -123,14 +124,22 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.my_methodologies) {
-            // Handle the camera action
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+            ft.replace(R.id.container, new MethodologyFragment());
+            ft.commit();
         } else if (id == R.id.all_methodologies) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+            ft.replace(R.id.container, new AllMethodologiesFragment());
+            ft.commit();
 
         } else if (id == R.id.to_implementation_book) {
             startActivity(BookStartActivity.getIntent(MainActivity.this));
 
         } else if (id == R.id.logout) {
             sessionManager.eraseSharedPreferences();
+            vosdb.clearEntireDB();
             this.finish();
 
         }

@@ -46,8 +46,7 @@ public class FollowMethodology extends AsyncTask<String, Void, Boolean> {
 
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.user_methodology_api_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -58,14 +57,15 @@ public class FollowMethodology extends AsyncTask<String, Void, Boolean> {
             urlConnection.setAllowUserInteraction(false);
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
-            urlConnection.setRequestMethod("PATCH");
+            urlConnection.setRequestMethod("POST");
             Cursor user = vosdb.getCurrentUser();
 
             JSONObject body = new JSONObject();
-            body.put("user", user.getInt(0));
+            body.put("id", user.getInt(0));
             body.put("methodology", follow_id);
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
+            System.out.println("PSD: About to follow");
             wr.flush();
 
             StringBuilder sb = new StringBuilder();
@@ -81,11 +81,12 @@ public class FollowMethodology extends AsyncTask<String, Void, Boolean> {
                 br.close();
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                int idFollow = jsonTemp.getInt("idFollow");
+                int idFollow = jsonTemp.getInt("idFolow");
                 vosdb.insertFollow(idFollow, name, 3);
+                System.out.println("PSD: Follow succesful");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));
+                Log.i("HTTPE", "Post Follow " +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }
