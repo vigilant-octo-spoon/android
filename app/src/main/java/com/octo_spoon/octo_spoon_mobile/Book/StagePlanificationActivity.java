@@ -222,11 +222,11 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 arrayEditNames.add(editRouteSheetTeamMemberName5);
 
                 ArrayList<EditText> arrayEditRoles = new ArrayList<EditText>();
-                arrayEditNames.add(editRouteSheetTeamMemberRol1);
-                arrayEditNames.add(editRouteSheetTeamMemberRol2);
-                arrayEditNames.add(editRouteSheetTeamMemberRol3);
-                arrayEditNames.add(editRouteSheetTeamMemberRol4);
-                arrayEditNames.add(editRouteSheetTeamMemberRol5);
+                arrayEditRoles.add(editRouteSheetTeamMemberRol1);
+                arrayEditRoles.add(editRouteSheetTeamMemberRol2);
+                arrayEditRoles.add(editRouteSheetTeamMemberRol3);
+                arrayEditRoles.add(editRouteSheetTeamMemberRol4);
+                arrayEditRoles.add(editRouteSheetTeamMemberRol5);
 
                 for (int i = 0; i < arrayEditNames.size(); i++) {
                     if (!arrayEditNames.get(i).getText().toString().isEmpty()) {
@@ -253,18 +253,18 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 arrayEditResourceItems.add(editResourcesItem5);
 
                 ArrayList<EditText> arrayEditResourceAvailable = new ArrayList<EditText>();
-                arrayEditResourceItems.add(editResourcesAv1);
-                arrayEditResourceItems.add(editResourcesAv2);
-                arrayEditResourceItems.add(editResourcesAv3);
-                arrayEditResourceItems.add(editResourcesAv4);
-                arrayEditResourceItems.add(editResourcesAv5);
+                arrayEditResourceAvailable.add(editResourcesAv1);
+                arrayEditResourceAvailable.add(editResourcesAv2);
+                arrayEditResourceAvailable.add(editResourcesAv3);
+                arrayEditResourceAvailable.add(editResourcesAv4);
+                arrayEditResourceAvailable.add(editResourcesAv5);
 
                 ArrayList<EditText> arrayEditResourceOb = new ArrayList<EditText>();
-                arrayEditResourceItems.add(editResourcesObt1);
-                arrayEditResourceItems.add(editResourcesObt2);
-                arrayEditResourceItems.add(editResourcesObt3);
-                arrayEditResourceItems.add(editResourcesObt4);
-                arrayEditResourceItems.add(editResourcesObt5);
+                arrayEditResourceOb.add(editResourcesObt1);
+                arrayEditResourceOb.add(editResourcesObt2);
+                arrayEditResourceOb.add(editResourcesObt3);
+                arrayEditResourceOb.add(editResourcesObt4);
+                arrayEditResourceOb.add(editResourcesObt5);
 
                 for (int i = 0; i < arrayEditResourceItems.size(); i++) {
                     if (!arrayEditResourceItems.get(i).getText().toString().isEmpty()) {
@@ -291,11 +291,11 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 arrayEditResourceItems.add(editResourcesConditionItem5);
 
                 ArrayList<EditText> arrayEditConditionInfos = new ArrayList<EditText>();
-                arrayEditResourceItems.add(editResourcesConditionInfo1);
-                arrayEditResourceItems.add(editResourcesConditionInfo2);
-                arrayEditResourceItems.add(editResourcesConditionInfo3);
-                arrayEditResourceItems.add(editResourcesConditionInfo4);
-                arrayEditResourceItems.add(editResourcesConditionInfo5);
+                arrayEditConditionInfos.add(editResourcesConditionInfo1);
+                arrayEditConditionInfos.add(editResourcesConditionInfo2);
+                arrayEditConditionInfos.add(editResourcesConditionInfo3);
+                arrayEditConditionInfos.add(editResourcesConditionInfo4);
+                arrayEditConditionInfos.add(editResourcesConditionInfo5);
 
 
 
