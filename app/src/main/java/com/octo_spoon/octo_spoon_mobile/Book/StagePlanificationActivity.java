@@ -129,6 +129,10 @@ public class StagePlanificationActivity extends AppCompatActivity {
         fabToImplementation = (FloatingActionButton) findViewById(R.id.fab_to_implementation);
         setFabToImplementationListener();
 
+        if (read_only) {
+            fabToImplementation.setVisibility(View.GONE);
+        }
+
         //editRouteSheetSelectedMethodology = (EditText)findViewById(R.id.edit_selected_methodology);
         editRouteSheetInitiative = (EditText)findViewById(R.id.edit_initiative);
         editRouteSheetObjective = (EditText)findViewById(R.id.edit_objective);

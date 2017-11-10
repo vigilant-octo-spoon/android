@@ -85,6 +85,9 @@ public class StageImplementationActivity extends AppCompatActivity {
             }
         });
         if (read_only) {
+            fabToEvaluate.setVisibility(View.GONE);
+        }
+        if (read_only) {
             fillWithStoredValues();
             //removeEditingProperties();
         }

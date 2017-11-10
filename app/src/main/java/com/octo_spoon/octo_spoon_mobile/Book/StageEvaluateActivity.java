@@ -71,6 +71,10 @@ public class StageEvaluateActivity extends AppCompatActivity {
         setFabToCommunicateListener();
 
         if (read_only) {
+            fabToCommunicate.setVisibility(View.GONE);
+        }
+
+        if (read_only) {
             fillWithStoredValues();
             //removeEditingProperties();
         }
