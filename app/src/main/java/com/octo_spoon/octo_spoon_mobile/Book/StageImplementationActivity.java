@@ -6,12 +6,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.PostBinnacleTask;
+import com.octo_spoon.octo_spoon_mobile.Backend.UpdateStep;
 import com.octo_spoon.octo_spoon_mobile.R;
 
 public class StageImplementationActivity extends AppCompatActivity {
@@ -72,10 +75,34 @@ public class StageImplementationActivity extends AppCompatActivity {
 
                 }
 
-                // TODO: 07-11-2017 IMPLEMENTATION REQUEST
-                startActivity(StageEvaluateActivity.getIntent(StageImplementationActivity.this));
+                try {
+                    new UpdateStep(vosdb, StageImplementationActivity.this, meth_id).execute().get();
+                } catch (Exception e) {
+                    Log.i("error", e.toString());
+                    return;
+                }
+                StageImplementationActivity.this.finish();
             }
         });
+        if (read_only) {
+            fillWithStoredValues();
+            removeEditingProperties();
+        }
+    }
+
+    private void fillWithStoredValues() {
+        //TODO: Bring info from DB and fill the fields
+    }
+
+
+    private void removeEditingProperties() {
+        editFromDate.setInputType(InputType.TYPE_NULL);
+        editDates.setInputType(InputType.TYPE_NULL);
+        editFinalDate.setInputType(InputType.TYPE_NULL);
+        editObservations.setInputType(InputType.TYPE_NULL);
+        editAdvances.setInputType(InputType.TYPE_NULL);
+        editObstacles.setInputType(InputType.TYPE_NULL);
+        editNewIdeas.setInputType(InputType.TYPE_NULL);
     }
 
     public static Intent getIntent(Context context) {
