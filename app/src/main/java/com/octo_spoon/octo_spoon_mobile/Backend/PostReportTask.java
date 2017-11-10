@@ -29,12 +29,14 @@ public class PostReportTask extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     public PostReportTask(DBHelper _vosdb, String comment,
-                            Context context) {
+                            Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.comment = comment;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -46,14 +48,11 @@ public class PostReportTask extends AsyncTask<String, Void, Boolean> {
     protected Boolean doInBackground(String... strings) {
         try {
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url) +
-                    "1/" +
-                    context.getResources().getString(R.string.user_methodology_report_url));
+                    context.getResources().getString(R.string.user_methodology_api_url) + Integer.toString(follow_id) + context.getResources().getString(R.string.user_methodology_report_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -80,11 +79,10 @@ public class PostReportTask extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idReport = jsonTemp.getString("idReport");
+                int idReport = jsonTemp.getInt("idReport");
+                vosdb.insertReport(idReport,follow_id,comment);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostReportTask" +  Integer.toString(HttpResult));
