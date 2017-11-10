@@ -30,13 +30,15 @@ public class PostRolesTask extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     public PostRolesTask(DBHelper _vosdb, String team_member_name, String team_member_role,
-                         Context context) {
+                         Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.team_member_name = team_member_name;
         this.team_member_role = team_member_role;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -48,12 +50,12 @@ public class PostRolesTask extends AsyncTask<String, Void, Boolean> {
     protected Boolean doInBackground(String... strings) {
         try {
             // TODO: 08-11-2017 change methodology 1
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.follows_id_1_follow_work_roles));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.url_follows)
+                + Integer.toString(follow_id) + context.getResources().getString(R.string.url_work_roles));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -63,8 +65,8 @@ public class PostRolesTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setRequestMethod("POST");
 
             JSONObject body = new JSONObject();
-            body.put("initiative_name", team_member_name);
-            body.put("objective", team_member_role);
+            body.put("name", team_member_name);
+            body.put("role", team_member_role);
 
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
@@ -82,10 +84,10 @@ public class PostRolesTask extends AsyncTask<String, Void, Boolean> {
                 }
                 br.close();
 
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idWorkRole = jsonTemp.getString("idWorkRole");
+                int idWorkRole = jsonTemp.getInt("idWorkRole");
+                vosdb.insertWorkRole(idWorkRole, follow_id, team_member_name, team_member_role);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostResourcesTask" +  Integer.toString(HttpResult));

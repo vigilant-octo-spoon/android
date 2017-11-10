@@ -235,7 +235,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     vosdb,
                                     arrayEditNames.get(i).getText().toString(),
                                     arrayEditRoles.get(i).getText().toString(),
-                                    StagePlanificationActivity.this
+                                    StagePlanificationActivity.this,
+                                    meth_id
                             ).execute();
                         } catch (Exception e) {
                             Log.i("error",e.toString());
