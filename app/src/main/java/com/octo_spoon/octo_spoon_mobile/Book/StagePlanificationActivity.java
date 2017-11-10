@@ -317,39 +317,37 @@ public class StagePlanificationActivity extends AppCompatActivity {
                     }
                 }
 
-
-                for (int i = 0; i < arrayEditConditionItems.size(); i++) {
-                    if (!arrayEditConditionItems.get(i).getText().toString().isEmpty()) {
-                        try {
-                            new PostBroadcastTask(
-                                    vosdb,
-                                    "Antes",
-                                    editDiffusionBeforeAudience.getText().toString(),
-                                    editDiffusionBeforeDifussionChannel.getText().toString(),
-                                    editDiffusionBeforeObjective.getText().toString(),
-                                    StagePlanificationActivity.this
-                            ).execute();
-                            new PostBroadcastTask(
-                                    vosdb,
-                                    "Durante",
-                                    editDiffusionDuringAudience.getText().toString(),
-                                    editDiffusionDuringDifussionChannel.getText().toString(),
-                                    editDiffusionDuringObjective.getText().toString(),
-                                    StagePlanificationActivity.this
-                            ).execute();
-                            new PostBroadcastTask(
-                                    vosdb,
-                                    "Después",
-                                    editDiffusionAfterAudience.getText().toString(),
-                                    editDiffusionAfterDifussionChannel.getText().toString(),
-                                    editDiffusionAfterObjective.getText().toString(),
-                                    StagePlanificationActivity.this
-                            ).execute();
-                        } catch (Exception e) {
-                            Log.i("error",e.toString());
-                            Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las instancias de difusión en la hoja de ruta", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                try {
+                    new PostBroadcastTask(
+                            vosdb,
+                            "Antes",
+                            editDiffusionBeforeAudience.getText().toString(),
+                            editDiffusionBeforeDifussionChannel.getText().toString(),
+                            editDiffusionBeforeObjective.getText().toString(),
+                            StagePlanificationActivity.this,
+                            meth_id
+                    ).execute();
+                    new PostBroadcastTask(
+                            vosdb,
+                            "Durante",
+                            editDiffusionDuringAudience.getText().toString(),
+                            editDiffusionDuringDifussionChannel.getText().toString(),
+                            editDiffusionDuringObjective.getText().toString(),
+                            StagePlanificationActivity.this,
+                            meth_id
+                    ).execute();
+                    new PostBroadcastTask(
+                            vosdb,
+                            "Despues",
+                            editDiffusionAfterAudience.getText().toString(),
+                            editDiffusionAfterDifussionChannel.getText().toString(),
+                            editDiffusionAfterObjective.getText().toString(),
+                            StagePlanificationActivity.this,
+                            meth_id
+                    ).execute();
+                } catch (Exception e) {
+                    Log.i("error",e.toString());
+                    Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las instancias de difusión en la hoja de ruta", Toast.LENGTH_SHORT).show();
                 }
 
                 Log.i("aaa",editRouteSheetSelectedMethodology.getText().toString());
