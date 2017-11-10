@@ -285,11 +285,11 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 }
 
                 ArrayList<EditText> arrayEditConditionItems = new ArrayList<EditText>();
-                arrayEditResourceItems.add(editResourcesConditionItem1);
-                arrayEditResourceItems.add(editResourcesConditionItem2);
-                arrayEditResourceItems.add(editResourcesConditionItem3);
-                arrayEditResourceItems.add(editResourcesConditionItem4);
-                arrayEditResourceItems.add(editResourcesConditionItem5);
+                arrayEditConditionItems.add(editResourcesConditionItem1);
+                arrayEditConditionItems.add(editResourcesConditionItem2);
+                arrayEditConditionItems.add(editResourcesConditionItem3);
+                arrayEditConditionItems.add(editResourcesConditionItem4);
+                arrayEditConditionItems.add(editResourcesConditionItem5);
 
                 ArrayList<EditText> arrayEditConditionInfos = new ArrayList<EditText>();
                 arrayEditConditionInfos.add(editResourcesConditionInfo1);
@@ -307,7 +307,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     vosdb,
                                     arrayEditConditionItems.get(i).getText().toString(),
                                     arrayEditConditionInfos.get(i).getText().toString(),
-                                    StagePlanificationActivity.this
+                                    StagePlanificationActivity.this,
+                                    meth_id
                             ).execute();
                         } catch (Exception e) {
                             Log.i("error",e.toString());

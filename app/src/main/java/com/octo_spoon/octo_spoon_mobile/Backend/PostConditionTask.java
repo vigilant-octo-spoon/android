@@ -29,13 +29,15 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     public PostConditionTask(DBHelper _vosdb, String condition_item, String condition_info,
-                             Context context) {
+                             Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.condition_item = condition_item;
         this.condition_info = condition_info;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -46,15 +48,12 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
 
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url) +
-                    "1/" +
-                    context.getResources().getString(R.string.user_methodology_condition_url));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.url_follows) +
+                    Integer.toString(follow_id) + context.getResources().getString(R.string.user_methodology_condition_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -82,11 +81,10 @@ public class PostConditionTask extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idCondition = jsonTemp.getString("idCondition");
+                int idCondition = jsonTemp.getInt("idCondition");
+                vosdb.insertCondition(idCondition, follow_id, condition_item, condition_info);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostConditionTask" + Integer.toString(HttpResult));
