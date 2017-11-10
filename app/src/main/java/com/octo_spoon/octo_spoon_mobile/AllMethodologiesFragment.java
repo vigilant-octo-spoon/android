@@ -19,21 +19,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.octo_spoon.octo_spoon_mobile.Adapters.AllMethodologyListAdapter;
 import com.octo_spoon.octo_spoon_mobile.Adapters.MethodologyListAdapter;
 import com.octo_spoon.octo_spoon_mobile.Backend.CurrentInformationHelper;
 import com.octo_spoon.octo_spoon_mobile.Backend.DBHelper;
+import com.octo_spoon.octo_spoon_mobile.Backend.FetchAllMetodologies;
 import com.octo_spoon.octo_spoon_mobile.Backend.FetchUserMethodologies;
+import com.octo_spoon.octo_spoon_mobile.ViewStructure.AllMethodology;
 import com.octo_spoon.octo_spoon_mobile.ViewStructure.Methodology;
 
 
-public class MethodologyFragment extends Fragment {
+public class AllMethodologiesFragment extends Fragment {
 
     private DBHelper vosdb;
     private CurrentInformationHelper db;
-    public FetchUserMethodologies fumTask = null;
+    public FetchAllMetodologies fumTask = null;
     private ListView lv_methodologies;
     public TextView emptyText;
-    public MethodologyListAdapter mla;
+    public AllMethodologyListAdapter mla;
     private SwipeRefreshLayout refreshMethodologies;
     private View mProgressView;
 
@@ -41,12 +44,12 @@ public class MethodologyFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MethodologyFragment() {
+    public AllMethodologiesFragment() {
         // Required empty public constructor
     }
 
-    public static MethodologyFragment newInstance(String param1, String param2) {
-        MethodologyFragment fragment = new MethodologyFragment();
+    public static AllMethodologiesFragment newInstance(String param1, String param2) {
+        AllMethodologiesFragment fragment = new AllMethodologiesFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -69,34 +72,35 @@ public class MethodologyFragment extends Fragment {
         mProgressView = root.findViewById(R.id.methodology_progress);
         emptyText = (TextView) root.findViewById(R.id.filesEmpty);
         emptyText.setTextColor(Color.DKGRAY);
-        mla = new MethodologyListAdapter(getActivity(), db.userMethodologies);
+        mla = new AllMethodologyListAdapter(getActivity(), db.allMethodologies);
         lv_methodologies.setAdapter(mla);
         Log.i("PSD SIZE",Integer.toString(db.userMethodologies.size()));
 
-        if (db.userMethodologies.size() == 0) {
+        if (db.allMethodologies.size() == 0) {
             showProgress(true);
 
-            fumTask = new FetchUserMethodologies(vosdb, getActivity(), this);
+            fumTask = new FetchAllMetodologies(vosdb, getActivity(), this);
             fumTask.execute();
         }
+        /*
         lv_methodologies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Methodology methodology = mla.getItem(i);
+                AllMethodology methodology = mla.getItem(i);
                 startActivity(MethodologyActivity.getIntent(getActivity(), methodology.id));
             }
-        });
+        });*/
         return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Cursor res = vosdb.getFollows();
-        db.userMethodologies.clear();
+        Cursor res = vosdb.getMethodologies();
+        db.allMethodologies.clear();
         while (res.moveToNext()) {
-            Methodology mt = new Methodology(res.getInt(0), res.getString(1), res.getInt(2));
-            db.userMethodologies.add(mt);
+            AllMethodology mt = new AllMethodology(res.getInt(0), res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5));
+            db.allMethodologies.add(mt);
         }
         mla.notifyDataSetChanged();
 
@@ -116,17 +120,6 @@ public class MethodologyFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
         }
     }
 

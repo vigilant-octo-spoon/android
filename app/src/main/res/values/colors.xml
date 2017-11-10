@@ -3,4 +3,7 @@
     <color name="colorPrimary">#f26b41</color>
     <color name="colorPrimaryDark">#F26B41</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="stepToDo">#B0B0B0</color>
+    <color name="stepFinished">#008000</color>
+    <color name="stepInCourse">#000000</color>
 </resources>

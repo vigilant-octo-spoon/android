@@ -30,10 +30,11 @@ public class PostEvaluationTask extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     public PostEvaluationTask(DBHelper _vosdb, String comments_connect, String comments_select, String comments_planning,
                             String comments_implementation, String users_reflection,  String users_suggestions,
-                            Context context) {
+                            Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.comments_connect = comments_connect;
         this.comments_select = comments_select;
@@ -42,6 +43,7 @@ public class PostEvaluationTask extends AsyncTask<String, Void, Boolean> {
         this.users_reflection = users_reflection;
         this.users_suggestions = users_suggestions;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -53,14 +55,11 @@ public class PostEvaluationTask extends AsyncTask<String, Void, Boolean> {
     protected Boolean doInBackground(String... strings) {
         try {
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url) +
-                    "1/" +
-                    context.getResources().getString(R.string.user_methodology_evaluation_url));
+                    context.getResources().getString(R.string.user_methodology_api_url) + Integer.toString(follow_id) +  context.getResources().getString(R.string.user_methodology_evaluation_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -93,10 +92,10 @@ public class PostEvaluationTask extends AsyncTask<String, Void, Boolean> {
                 }
                 br.close();
 
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idEvaluation = jsonTemp.getString("idEvaluation");
+                int idEvaluation = jsonTemp.getInt("idEvaluation");
+                vosdb.insertEvaluation(idEvaluation,follow_id,comments_connect,comments_select,comments_planning,comments_implementation,users_reflection,users_suggestions);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "POSTEVALUATIONTASK " +  Integer.toString(HttpResult));

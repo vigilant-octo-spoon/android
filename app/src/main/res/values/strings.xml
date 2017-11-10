@@ -33,18 +33,21 @@
     <!-- Strings for API text -->
     <string name="main_api_url">https://red-lab-sur.herokuapp.com/</string>
     <string name="auth_api_url">sessions</string>
-    <string name="follows_id_1_follow_planning">follows/1/planning/</string>
-    <string name="follows_id_1_follow_work_roles">follows/1/work_roles/</string>
+    <string name="url_follows">follows/</string>
+    <string name="url_planning">/planning/</string>
+    <string name="url_work_roles">/work_roles/</string>
+    <string name="url_methodologies">methodologies/</string>
     <string name="sp_user_id">user_id</string>
     <string name="sp_token">token</string>
     <string name="sp_db_name">redlabsur</string>
     <string name="user_methodology_api_url">follows/</string>
-    <string name="user_methodology_condition_url">condition/</string>
-    <string name="user_methodology_broadcast_url">broadcast/</string>
-    <string name="user_methodology_resource_url">resource/</string>
-    <string name="user_methodology_binnacle_url">binnacle/</string>
-    <string name="user_methodology_evaluation_url">evaluation/</string>
-    <string name="user_methodology_report_url">report/</string>
+    <string name="user_methodology_condition_url">/condition/</string>
+    <string name="user_methodology_broadcast_url">/broadcast/</string>
+    <string name="user_methodology_resource_url">/resource/</string>
+    <string name="user_methodology_binnacle_url">/binnacle/</string>
+    <string name="user_methodology_evaluation_url">/evaluation/</string>
+    <string name="user_methodology_report_url">/report/</string>
+    <string name="url_step">/step/</string>
     <string name="title_activity_main">MainActivity</string>
 
     <!-- Strings for methodology buttons -->
@@ -52,6 +55,7 @@
     <string name="implementate">Impl</string>
     <string name="evaluate">Eval</string>
     <string name="communicate">Com</string>
+    <string name="addMeth">Agregar</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

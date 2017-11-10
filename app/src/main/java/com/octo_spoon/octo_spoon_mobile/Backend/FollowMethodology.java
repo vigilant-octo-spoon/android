@@ -19,27 +19,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ESTEBANFML on 09-11-2017.
+ * Created by Pablo Nieto on 09-11-2017.
  */
 
-public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
+public class FollowMethodology extends AsyncTask<String, Void, Boolean> {
 
     private DBHelper vosdb;
-    private String moment_of_implementation, audience,diffusion_channel , objective;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
     private int follow_id;
+    private String name;
 
-    public PostBroadcastTask(DBHelper _vosdb, String moment_of_implementation, String audience, String diffusion_channel, String objective,
-                             Context context, int follow_id) {
+    public FollowMethodology(DBHelper _vosdb, Context context, int follow_id, String name) {
         this.vosdb = _vosdb;
-        this.moment_of_implementation = moment_of_implementation;
-        this.audience = audience;
-        this.diffusion_channel = diffusion_channel;
-        this.objective = objective;
         this.context = context;
         this.follow_id = follow_id;
+        this.name = name;
     }
 
     protected void onPreExecute() {
@@ -50,9 +46,7 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
 
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url) + Integer.toString(follow_id) +
-                    context.getResources().getString(R.string.user_methodology_broadcast_url));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.user_methodology_api_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -64,15 +58,14 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
             urlConnection.setRequestMethod("POST");
+            Cursor user = vosdb.getCurrentUser();
 
             JSONObject body = new JSONObject();
-            body.put("moment_of_implementation", moment_of_implementation);
-            body.put("audience", audience);
-            body.put("diffusion_channel", diffusion_channel);
-            body.put("objective", objective);
-
+            body.put("id", user.getInt(0));
+            body.put("methodology", follow_id);
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
+            System.out.println("PSD: About to follow");
             wr.flush();
 
             StringBuilder sb = new StringBuilder();
@@ -88,11 +81,12 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
                 br.close();
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                int idBroadcast = jsonTemp.getInt("idBroadcast");
-                vosdb.insertBroadcast(idBroadcast, follow_id, moment_of_implementation, audience, diffusion_channel, objective);
+                int idFollow = jsonTemp.getInt("idFolow");
+                vosdb.insertFollow(idFollow, name, 3);
+                System.out.println("PSD: Follow succesful");
                 return Boolean.TRUE;
             } else {
-                Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));
+                Log.i("HTTPE", "Post Follow " +  Integer.toString(HttpResult));
                 System.out.println(urlConnection.getResponseMessage());
                 return Boolean.FALSE;
             }

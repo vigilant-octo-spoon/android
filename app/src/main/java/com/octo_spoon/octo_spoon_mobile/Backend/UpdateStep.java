@@ -19,25 +19,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by ESTEBANFML on 09-11-2017.
+ * Created by Pablo Nieto on 09-11-2017.
  */
 
-public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
+public class UpdateStep extends AsyncTask<String, Void, Boolean> {
 
     private DBHelper vosdb;
-    private String moment_of_implementation, audience,diffusion_channel , objective;
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
     private int follow_id;
 
-    public PostBroadcastTask(DBHelper _vosdb, String moment_of_implementation, String audience, String diffusion_channel, String objective,
-                             Context context, int follow_id) {
+    public UpdateStep(DBHelper _vosdb, Context context, int follow_id) {
         this.vosdb = _vosdb;
-        this.moment_of_implementation = moment_of_implementation;
-        this.audience = audience;
-        this.diffusion_channel = diffusion_channel;
-        this.objective = objective;
         this.context = context;
         this.follow_id = follow_id;
     }
@@ -52,7 +46,7 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
         try {
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
                     context.getResources().getString(R.string.user_methodology_api_url) + Integer.toString(follow_id) +
-                    context.getResources().getString(R.string.user_methodology_broadcast_url));
+                    context.getResources().getString(R.string.url_step));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -63,14 +57,10 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
             urlConnection.setAllowUserInteraction(false);
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
-            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestMethod("PATCH");
 
             JSONObject body = new JSONObject();
-            body.put("moment_of_implementation", moment_of_implementation);
-            body.put("audience", audience);
-            body.put("diffusion_channel", diffusion_channel);
-            body.put("objective", objective);
-
+            body.put("step", vosdb.getStep(follow_id) + 1);
             OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
             wr.write(body.toString());
             wr.flush();
@@ -88,8 +78,8 @@ public class PostBroadcastTask extends AsyncTask<String, Void, Boolean> {
                 br.close();
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                int idBroadcast = jsonTemp.getInt("idBroadcast");
-                vosdb.insertBroadcast(idBroadcast, follow_id, moment_of_implementation, audience, diffusion_channel, objective);
+                int newStep = jsonTemp.getInt("step");
+                vosdb.updateStep(newStep, follow_id);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostBroadcastTask " +  Integer.toString(HttpResult));

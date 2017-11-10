@@ -1,13 +1,20 @@
 package com.octo_spoon.octo_spoon_mobile.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.octo_spoon.octo_spoon_mobile.Book.StageCommunicateActivity;
+import com.octo_spoon.octo_spoon_mobile.Book.StageEvaluateActivity;
+import com.octo_spoon.octo_spoon_mobile.Book.StageImplementationActivity;
+import com.octo_spoon.octo_spoon_mobile.Book.StagePlanificationActivity;
 import com.octo_spoon.octo_spoon_mobile.ViewStructure.Methodology;
 
 import java.util.List;
@@ -43,24 +50,109 @@ public class MethodologyListAdapter extends ArrayAdapter<Methodology> {
         }
 
         // Referencias UI.
-        TextView fileName = (TextView) convertView.findViewById(R.id.textView_methodologyTitle);
-        ImageView fileIcon = (ImageView) convertView.findViewById(R.id.imageView_methodologyIcon);
+        TextView fileName = convertView.findViewById(R.id.textView_methodologyTitle);
+        Button button1 = convertView.findViewById(R.id.plan_button);
+        Button button2 = convertView.findViewById(R.id.impl_button);
+        Button button3 = convertView.findViewById(R.id.eval_button);
+        Button button4 = convertView.findViewById(R.id.comm_button);
 
         Methodology methodology = getItem(position);
-        /*
-
-        if (documentFile.type.equals("folder") && !documentFile.id.equals("0")){
-            fileIcon.setImageResource(R.drawable.ic_folder_open_black_24dp);
+        final int meth_id = methodology.id;
+        //Set all button text to gray
+        button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepToDo));
+        button1.setClickable(false);
+        button2.setClickable(false);
+        button3.setClickable(false);
+        button4.setClickable(false);
+        if (methodology.step >= 3) {
+            button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+            button1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StagePlanificationActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", false);
+                    getContext().startActivity(intent);
+                }
+            });
+            button1.setClickable(true);
         }
-        else {
-            if (documentFile.isDrive){
-                fileIcon.setImageResource(R.drawable.ic_cloud_download_black_24dp);
-            } else if (documentFile.id.equals("0")){
-                fileIcon.setImageResource(R.drawable.ic_arrow_back_black_24dp);
-            } else {
-                fileIcon.setImageResource(R.drawable.ic_file_download_black_24dp);
-            }
-        }*/
+        if (methodology.step >= 4) {
+            button1.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StagePlanificationActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", true);
+                    getContext().startActivity(intent);
+                }
+            });
+            button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+            button2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageImplementationActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", false);
+                    getContext().startActivity(intent);
+                }
+            });
+            button2.setClickable(true);
+        }
+        if (methodology.step >= 5) {
+            button2.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+            button2.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageImplementationActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", true);
+                    getContext().startActivity(intent);
+                }
+            });
+            button3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageEvaluateActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", false);
+                    getContext().startActivity(intent);
+                }
+            });
+            button3.setClickable(true);
+        }
+        if (methodology.step >= 6) {
+            button3.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepInCourse));
+            button3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageEvaluateActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", true);
+                    getContext().startActivity(intent);
+                }
+            });
+            button4.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageCommunicateActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", false);
+                    getContext().startActivity(intent);
+                }
+            });
+            button4.setClickable(true);
+        }
+        if (methodology.step >= 7) {
+            button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
+            button3.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), StageEvaluateActivity.class);
+                    intent.putExtra("meth_id", meth_id);
+                    intent.putExtra("read_only", true);
+                    getContext().startActivity(intent);
+                }
+            });
+        }
         fileName.setText(methodology.title);
 
         return convertView;

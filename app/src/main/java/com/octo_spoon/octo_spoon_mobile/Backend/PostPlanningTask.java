@@ -30,11 +30,12 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     // TODO: 09-11-2017 ERROR 500
     public PostPlanningTask(DBHelper _vosdb, String initiativeName, String objective,
                             //String place, String startDate, String finishDate, Context context, StagePlanificationActivity stagePlanificationActivity) {
-                            String place, String startDate, String finishDate, Context context) {
+                            String place, String startDate, String finishDate, Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.initiativeName = initiativeName;
         this.objective = objective;
@@ -42,6 +43,7 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -51,12 +53,12 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
 
     protected Boolean doInBackground(String... strings) {
         try {
-            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.follows_id_1_follow_planning));
+            URL url = new URL(context.getResources().getString(R.string.main_api_url) + context.getResources().getString(R.string.url_follows)
+                    + Integer.toString(follow_id) + context.getResources().getString(R.string.url_planning));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -87,11 +89,10 @@ public class PostPlanningTask extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idPlanning = jsonTemp.getString("idPlanning");
+                int idPlanning = jsonTemp.getInt("idPlanning");
+                vosdb.insertPlanning(idPlanning, follow_id, initiativeName, objective, place, startDate, finishDate);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "PostPlanningTask" + Integer.toString(HttpResult));
