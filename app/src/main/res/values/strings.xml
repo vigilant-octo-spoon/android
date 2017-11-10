@@ -43,7 +43,7 @@
     <string name="user_methodology_condition_url">/condition/</string>
     <string name="user_methodology_broadcast_url">/broadcast/</string>
     <string name="user_methodology_resource_url">/resource/</string>
-    <string name="user_methodology_binnacle_url">binnacle/</string>
+    <string name="user_methodology_binnacle_url">/binnacle/</string>
     <string name="user_methodology_evaluation_url">evaluation/</string>
     <string name="user_methodology_report_url">report/</string>
     <string name="url_step">/step/</string>

@@ -30,10 +30,11 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
     private Exception exception;
     private Context context;
     private SessionManager sessionManager;
+    private int follow_id;
 
     public PostBinnacleTask(DBHelper _vosdb, String start_date, String finish_date, String objectives,
                             String observations, String advances,  String obstacles,  String ideas,
-                             Context context) {
+                             Context context, int follow_id) {
         this.vosdb = _vosdb;
         this.start_date = start_date;
         this.finish_date = finish_date;
@@ -43,6 +44,7 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
         this.obstacles = obstacles;
         this.ideas = ideas;
         this.context = context;
+        this.follow_id = follow_id;
     }
 
     protected void onPreExecute() {
@@ -55,14 +57,12 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
         try {
             // TODO: 08-11-2017 change methodology 1
             URL url = new URL(context.getResources().getString(R.string.main_api_url) +
-                    context.getResources().getString(R.string.user_methodology_api_url) +
-                    "1/" +
+                    context.getResources().getString(R.string.user_methodology_api_url) + Integer.toString(follow_id) +
                     context.getResources().getString(R.string.user_methodology_binnacle_url));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            Cursor user = vosdb.getCurrentUser();
-            urlConnection.setRequestProperty("Authorization", sessionManager.getToken());
+            urlConnection.setRequestProperty("token", sessionManager.getToken());
             urlConnection.setConnectTimeout(10000);
             urlConnection.setReadTimeout(10000);
             urlConnection.setUseCaches(false);
@@ -95,11 +95,10 @@ public class PostBinnacleTask  extends AsyncTask<String, Void, Boolean> {
                     sb.append(line + "\n");
                 }
                 br.close();
-
-                //vosdb.clearDB("apikeys");
                 JSONObject jsonTemp = new JSONObject(sb.toString());
                 String message = jsonTemp.getString("message");
-                String idBinnacle = jsonTemp.getString("idBinnacle");
+                int idBinnacle = jsonTemp.getInt("idBinnacle");
+                vosdb.insertBinnacle(idBinnacle, follow_id, start_date, finish_date, objectives, observations, advances, obstacles, ideas);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", "POSTBINNACLETASK " +  Integer.toString(HttpResult));

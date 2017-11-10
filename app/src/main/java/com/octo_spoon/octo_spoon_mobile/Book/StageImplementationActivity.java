@@ -28,10 +28,15 @@ public class StageImplementationActivity extends AppCompatActivity {
     private EditText editNewIdeas;
     private DBHelper vosdb;
 
+    private int meth_id;
+    private boolean read_only  = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_implementation);
+        meth_id = getIntent().getIntExtra("meth_id", -1);;
+        read_only = getIntent().getBooleanExtra("read_only", false);
         getSupportActionBar().setTitle("Implementar");
 
         vosdb = new DBHelper(this);
@@ -59,7 +64,8 @@ public class StageImplementationActivity extends AppCompatActivity {
                             editAdvances.getText().toString(),
                             editObstacles.getText().toString(),
                             editNewIdeas.getText().toString(),
-                            StageImplementationActivity.this
+                            StageImplementationActivity.this,
+                            meth_id
                     ).execute();
                 } catch (Exception e){
                     Toast.makeText(StageImplementationActivity.this, "No se logró grabar la bitácora", Toast.LENGTH_SHORT).show();

@@ -130,9 +130,14 @@ public class StagePlanificationActivity extends AppCompatActivity {
         setFabToImplementationListener();
 
         if (read_only) {
+            fillWithStoredValues();
             removeEditingProperties();
         }
 
+    }
+
+    private void fillWithStoredValues() {
+        //TODO: Bring info from DB and fill the fields
     }
 
     private void removeEditingProperties() {
