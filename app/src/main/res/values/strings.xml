@@ -36,6 +36,7 @@
     <string name="url_follows">follows/</string>
     <string name="url_planning">/planning/</string>
     <string name="url_work_roles">/work_roles/</string>
+    <string name="url_methodologies">methodologies/</string>
     <string name="sp_user_id">user_id</string>
     <string name="sp_token">token</string>
     <string name="sp_db_name">redlabsur</string>
@@ -54,6 +55,7 @@
     <string name="implementate">Impl</string>
     <string name="evaluate">Eval</string>
     <string name="communicate">Com</string>
+    <string name="addMeth">Agregar</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

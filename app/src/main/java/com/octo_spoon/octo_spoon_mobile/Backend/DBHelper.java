@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table if not exists apikeys " +
-                        "(apikey text primary key, firstname text, lastname text, email text)"
+                        "(id integer, apikey text, firstname text, lastname text, email text)"
         );
         //The users current methodologies
         db.execSQL(
@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //All methodologies
         db.execSQL(
                 "create table if not exists methodologies " +
-                        "(id integer, title text, description text)"
+                        "(id integer, title text, description text, link_video text, category text, organization text)"
         );
 
     }
@@ -83,9 +83,10 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertApikey(String apikey, String firstname, String lastname, String email) {
+    public boolean insertApikey(int id, String apikey, String firstname, String lastname, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put("id", id);
         cv.put("apikey", apikey);
         cv.put("firstname", firstname);
         cv.put("lastname", lastname);
@@ -251,11 +252,28 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertMethodology(int id, String title, String description, String link_video, String category, String organization) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("title", title);
+        cv.put("description", description);
+        cv.put("link_video", link_video);
+        cv.put("category", category);
+        cv.put("organization", organization);
+        try {
+            db.insertOrThrow("methodologies", null, cv);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     public String getCurrentApikey() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from apikeys", null);
         res.moveToNext();
-        return res.getString(0);
+        return res.getString(1);
     }
 
     public Cursor getCurrentUser() {
@@ -274,7 +292,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getMethodologies() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from methodologies", null);
-        res.moveToNext();
         return res;
     }
 
