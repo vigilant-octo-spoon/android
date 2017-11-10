@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -128,6 +129,63 @@ public class StagePlanificationActivity extends AppCompatActivity {
         fabToImplementation = (FloatingActionButton) findViewById(R.id.fab_to_implementation);
         setFabToImplementationListener();
 
+        if (read_only) {
+            removeEditingProperties();
+        }
+
+    }
+
+    private void removeEditingProperties() {
+        editRouteSheetSelectedMethodology.setInputType(InputType.TYPE_NULL);
+        editRouteSheetInitiative.setInputType(InputType.TYPE_NULL);
+        editRouteSheetObjective.setInputType(InputType.TYPE_NULL);
+        editRouteSheetImplementationPlace.setInputType(InputType.TYPE_NULL);
+        editRouteSheetInitialDate.setInputType(InputType.TYPE_NULL);
+        editRouteSheetFinishDate.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberName1.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberRol1.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberName2.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberRol2.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberName3.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberRol3.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberName4.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberRol4.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberName5.setInputType(InputType.TYPE_NULL);
+        editRouteSheetTeamMemberRol5.setInputType(InputType.TYPE_NULL);
+        editResourcesItem1.setInputType(InputType.TYPE_NULL);
+        editResourcesAv1.setInputType(InputType.TYPE_NULL);
+        editResourcesObt1.setInputType(InputType.TYPE_NULL);
+        editResourcesItem2.setInputType(InputType.TYPE_NULL);
+        editResourcesAv2.setInputType(InputType.TYPE_NULL);
+        editResourcesObt2.setInputType(InputType.TYPE_NULL);
+        editResourcesItem3.setInputType(InputType.TYPE_NULL);
+        editResourcesAv3.setInputType(InputType.TYPE_NULL);
+        editResourcesObt3.setInputType(InputType.TYPE_NULL);
+        editResourcesItem4.setInputType(InputType.TYPE_NULL);
+        editResourcesAv4.setInputType(InputType.TYPE_NULL);
+        editResourcesObt4.setInputType(InputType.TYPE_NULL);
+        editResourcesItem5.setInputType(InputType.TYPE_NULL);
+        editResourcesAv5.setInputType(InputType.TYPE_NULL);
+        editResourcesObt5.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionItem1.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionInfo1.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionItem2.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionInfo2.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionItem3.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionInfo3.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionItem4.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionInfo4.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionItem5.setInputType(InputType.TYPE_NULL);
+        editResourcesConditionInfo5.setInputType(InputType.TYPE_NULL);
+        editDiffusionBeforeAudience.setInputType(InputType.TYPE_NULL);
+        editDiffusionBeforeDifussionChannel.setInputType(InputType.TYPE_NULL);
+        editDiffusionBeforeObjective.setInputType(InputType.TYPE_NULL);
+        editDiffusionDuringAudience.setInputType(InputType.TYPE_NULL);
+        editDiffusionDuringDifussionChannel.setInputType(InputType.TYPE_NULL);
+        editDiffusionDuringObjective.setInputType(InputType.TYPE_NULL);
+        editDiffusionAfterAudience.setInputType(InputType.TYPE_NULL);
+        editDiffusionAfterDifussionChannel.setInputType(InputType.TYPE_NULL);
+        editDiffusionAfterObjective.setInputType(InputType.TYPE_NULL);
     }
 
     public void setFabToImplementationListener() {
