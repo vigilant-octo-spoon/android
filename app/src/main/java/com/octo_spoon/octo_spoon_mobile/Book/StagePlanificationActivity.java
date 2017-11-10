@@ -274,7 +274,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     arrayEditResourceItems.get(i).getText().toString(),
                                     arrayEditResourceAvailable.get(i).getText().toString(),
                                     arrayEditResourceOb.get(i).getText().toString(),
-                                    StagePlanificationActivity.this
+                                    StagePlanificationActivity.this,
+                                    meth_id
                             ).execute();
                         } catch (Exception e) {
                             Log.i("error",e.toString());

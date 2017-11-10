@@ -42,7 +42,7 @@
     <string name="user_methodology_api_url">follows/</string>
     <string name="user_methodology_condition_url">condition/</string>
     <string name="user_methodology_broadcast_url">broadcast/</string>
-    <string name="user_methodology_resource_url">resource/</string>
+    <string name="user_methodology_resource_url">/resource/</string>
     <string name="user_methodology_binnacle_url">binnacle/</string>
     <string name="user_methodology_evaluation_url">evaluation/</string>
     <string name="user_methodology_report_url">report/</string>
