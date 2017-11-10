@@ -360,7 +360,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                 Log.i("aaa",editResourcesItem1.getText().toString());
                 Log.i("aaa",editDiffusionBeforeAudience.getText().toString());
                 try {
-                    new UpdateStep(vosdb, StagePlanificationActivity.this, meth_id).execute();
+                    new UpdateStep(vosdb, StagePlanificationActivity.this, meth_id).execute().get();
                 } catch (Exception e) {
                     Log.i("error", e.toString());
                     return;

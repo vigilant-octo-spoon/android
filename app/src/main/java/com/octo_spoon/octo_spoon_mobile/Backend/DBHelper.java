@@ -268,7 +268,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getFollows() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from follows", null);
-        res.moveToNext();
         return res;
     }
 

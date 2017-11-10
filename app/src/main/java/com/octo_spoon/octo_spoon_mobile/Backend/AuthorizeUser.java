@@ -87,11 +87,11 @@ public class AuthorizeUser extends AsyncTask<String, Void, Boolean> {
                 String apikey = jsonTemp.getString("authentication_token");
                 String email = jsonTemp.getString("email");
                 Log.i("PSD_apikey", apikey);
-                //String firstname = jsonTemp.getString("firstname");
-                //String lastname = jsonTemp.getString("lastname");
+                String name = jsonTemp.getString("name");
+                String last_name = jsonTemp.getString("last_name");
 
                 sessionManager.saveLogInData(apikey);
-                vosdb.insertApikey(apikey,null,null,email);
+                vosdb.insertApikey(apikey,name,last_name,email);
                 return Boolean.TRUE;
             } else {
                 Log.i("HTTPE", Integer.toString(HttpResult));

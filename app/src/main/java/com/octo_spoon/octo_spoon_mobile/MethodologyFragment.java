@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -86,6 +87,19 @@ public class MethodologyFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Cursor res = vosdb.getFollows();
+        db.userMethodologies.clear();
+        while (res.moveToNext()) {
+            Methodology mt = new Methodology(res.getInt(0), res.getString(1), res.getInt(2));
+            db.userMethodologies.add(mt);
+        }
+        mla.notifyDataSetChanged();
+
     }
 
     public void setEmptyVisibility() {
