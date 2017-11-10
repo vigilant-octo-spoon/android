@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            sessionManager.eraseSharedPreferences();
             super.onBackPressed();
         }
     }
@@ -143,5 +144,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(context,MainActivity.class);
         return intent;
     }
+
+
 
 }

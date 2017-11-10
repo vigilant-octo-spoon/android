@@ -33,8 +33,9 @@
     <!-- Strings for API text -->
     <string name="main_api_url">https://red-lab-sur.herokuapp.com/</string>
     <string name="auth_api_url">sessions</string>
-    <string name="follows_id_1_follow_planning">follows/1/planning/</string>
-    <string name="follows_id_1_follow_work_roles">follows/1/work_roles/</string>
+    <string name="url_follows">follows/</string>
+    <string name="url_planning">/planning/</string>
+    <string name="url_work_roles">/work_roles/</string>
     <string name="sp_user_id">user_id</string>
     <string name="sp_token">token</string>
     <string name="sp_db_name">redlabsur</string>

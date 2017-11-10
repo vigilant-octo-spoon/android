@@ -94,6 +94,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private int meth_id;
+    private boolean read_only  = false;
 
     private DBHelper vosdb;
 
@@ -102,6 +104,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_planification);
+        meth_id = getIntent().getIntExtra("meth_id", -1);;
+        read_only = getIntent().getBooleanExtra("read_only", false);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -202,7 +206,8 @@ public class StagePlanificationActivity extends AppCompatActivity {
                             editRouteSheetImplementationPlace.getText().toString(),
                             editRouteSheetInitialDate.getText().toString(),
                             editRouteSheetFinishDate.getText().toString(),
-                            StagePlanificationActivity.this
+                            StagePlanificationActivity.this,
+                            meth_id
                     ).execute();
                 } catch (Exception e) {
                     Log.i("error",e.toString());
