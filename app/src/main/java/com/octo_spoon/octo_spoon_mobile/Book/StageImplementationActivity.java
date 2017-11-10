@@ -2,6 +2,7 @@ package com.octo_spoon.octo_spoon_mobile.Book;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -85,10 +86,21 @@ public class StageImplementationActivity extends AppCompatActivity {
             }
         });
         if (read_only) {
+
             fabToEvaluate.setVisibility(View.GONE);
-        }
-        if (read_only) {
-            fillWithStoredValues();
+            //fillWithStoredValues();
+            Cursor cursor = vosdb.getBinnacles(meth_id);
+            while (cursor.moveToNext()){
+                Log.i("CURSOR", cursor.toString());
+                editFromDate.setText(cursor.getString(2));
+                editFinalDate.setText(cursor.getString(3));
+                //editDates.setText(cursor.getString(4));
+                editObservations.setText(cursor.getString(4));
+                editAdvances.setText(cursor.getString(5));
+                editObstacles.setText(cursor.getString(6));
+                editNewIdeas.setText(cursor.getString(7));
+            }
+
             //removeEditingProperties();
         }
     }

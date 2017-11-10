@@ -2,6 +2,7 @@ package com.octo_spoon.octo_spoon_mobile.Book;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -76,7 +77,31 @@ public class StageEvaluateActivity extends AppCompatActivity {
 
         if (read_only) {
             fillWithStoredValues();
-            //removeEditingProperties();
+
+            /*Cursor cursor = vosdb.getEvaluations(meth_id);
+            while (cursor.moveToNext()){
+                editProcessConnect.setText(cursor.getString(2));
+                editProcessChoose.setText(cursor.getString(3));
+                editProcessPlan.setText(cursor.getString(4));
+                editProcessImplementToImprove.setText(cursor.getString(5));
+                editProcessImplementToScale.setText(cursor.getString(5));
+                editProcessImplementWorked.setText(cursor.getString(5));
+                editUsersReflection.setText(cursor.getString(6));
+                editUsersSuggestions.setText(cursor.getString(7));
+
+                editProcessConnect.setInputType(InputType.TYPE_NULL);
+                editProcessConnect.setInputType(InputType.TYPE_NULL);
+                editProcessChoose.setInputType(InputType.TYPE_NULL);
+                editProcessPlan.setInputType(InputType.TYPE_NULL);
+                editProcessImplementToImprove.setInputType(InputType.TYPE_NULL);
+                editProcessImplementToScale.setInputType(InputType.TYPE_NULL);
+                editProcessImplementWorked.setInputType(InputType.TYPE_NULL);
+                editUsersReflection.setInputType(InputType.TYPE_NULL);
+                editUsersSuggestions.setInputType(InputType.TYPE_NULL);
+            }*/
+            //removeEditingProper
+            //
+            // ties();
         }
     }
 

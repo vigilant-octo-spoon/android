@@ -211,7 +211,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("obstacles", obstacles);
         cv.put("ideas", ideas);
         try {
-            db.insertOrThrow("conditions",null,cv);
+            db.insertOrThrow("binnacles",null,cv);
         } catch (Exception e) {
             return false;
         }
@@ -298,28 +298,28 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getPlannings(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from plannings where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
     public Cursor getWorkRoles(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from work_roles where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
     public Cursor getBroadcasts(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from broadcasts where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
     public Cursor getConditions(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from conditions where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
@@ -333,21 +333,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getBinnacles(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from binnacles where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
     public Cursor getEvaluations(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from evaluations where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 
     public Cursor getReports(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from reports where meth_id=" + Integer.toString(id), null);
-        res.moveToNext();
+        //res.moveToNext();
         return res;
     }
 

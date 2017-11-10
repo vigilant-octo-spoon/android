@@ -144,9 +144,9 @@ public class MethodologyListAdapter extends ArrayAdapter<Methodology> {
         }
         if (methodology.step >= 7) {
             button4.setTextColor(ContextCompat.getColor(getContext(),R.color.stepFinished));
-            button3.setOnClickListener(new View.OnClickListener() {
+            button4.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), StageEvaluateActivity.class);
+                    Intent intent = new Intent(getContext(), StageCommunicateActivity.class);
                     intent.putExtra("meth_id", meth_id);
                     intent.putExtra("read_only", true);
                     getContext().startActivity(intent);

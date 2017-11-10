@@ -2,6 +2,7 @@ package com.octo_spoon.octo_spoon_mobile.Book;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,8 +68,15 @@ public class StageCommunicateActivity extends AppCompatActivity {
                 StageCommunicateActivity.this.finish();
             }
         });
+        Log.i("READ", Boolean.toString(read_only));
+        Log.i("READ", Integer.toString(meth_id));
         if (read_only) {
             fabToEnd.setVisibility(View.GONE);
+            Cursor communicate = vosdb.getReports(meth_id);
+            while (communicate.moveToNext()){
+                editComments.setText(communicate.getString(2));
+                editComments.setInputType(InputType.TYPE_NULL);
+            }
         }
         if (read_only) {
             fillWithStoredValues();
