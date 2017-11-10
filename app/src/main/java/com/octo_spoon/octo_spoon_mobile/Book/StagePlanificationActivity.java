@@ -33,7 +33,7 @@ import java.util.List;
 public class StagePlanificationActivity extends AppCompatActivity {
 
     //ROUTE SHEET FRAGMENT ELEMENTS
-    private EditText editRouteSheetSelectedMethodology;
+    //private EditText editRouteSheetSelectedMethodology;
     private EditText editRouteSheetInitiative;
     private EditText editRouteSheetObjective;
     private EditText editRouteSheetImplementationPlace;
@@ -129,9 +129,66 @@ public class StagePlanificationActivity extends AppCompatActivity {
         fabToImplementation = (FloatingActionButton) findViewById(R.id.fab_to_implementation);
         setFabToImplementationListener();
 
+        //editRouteSheetSelectedMethodology = (EditText)findViewById(R.id.edit_selected_methodology);
+        editRouteSheetInitiative = (EditText)findViewById(R.id.edit_initiative);
+        editRouteSheetObjective = (EditText)findViewById(R.id.edit_objective);
+        editRouteSheetImplementationPlace = (EditText)findViewById(R.id.edit_implementation_place);
+        editRouteSheetInitialDate = (EditText)findViewById(R.id.edit_initial_date);
+        editRouteSheetFinishDate = (EditText)findViewById(R.id.edit_finish_date);
+        editRouteSheetTeamMemberName1 = (EditText)findViewById(R.id.edit_member_name_1);
+        editRouteSheetTeamMemberRol1 = (EditText)findViewById(R.id.edit_member_rol_1);
+        editRouteSheetTeamMemberName2 = (EditText)findViewById(R.id.edit_member_name_2);
+        editRouteSheetTeamMemberRol2 = (EditText)findViewById(R.id.edit_member_rol_2);
+        editRouteSheetTeamMemberName3 = (EditText)findViewById(R.id.edit_member_name_3);
+        editRouteSheetTeamMemberRol3 = (EditText)findViewById(R.id.edit_member_rol_3);
+        editRouteSheetTeamMemberName4 = (EditText)findViewById(R.id.edit_member_name_4);
+        editRouteSheetTeamMemberRol4 = (EditText)findViewById(R.id.edit_member_rol_4);
+        editRouteSheetTeamMemberName5 = (EditText)findViewById(R.id.edit_member_name_5);
+        editRouteSheetTeamMemberRol5 = (EditText)findViewById(R.id.edit_member_rol_5);
+
+        //ROSOURCES FRAGMENT ELEMENTS
+        editResourcesItem1 = (EditText)findViewById(R.id.edit_resources_item_1);
+        editResourcesAv1 = (EditText)findViewById(R.id.edit_resources_av_1);
+        editResourcesObt1 = (EditText)findViewById(R.id.edit_resources_item_obt_1);
+        editResourcesItem2 = (EditText)findViewById(R.id.edit_resources_item_2);
+        editResourcesAv2 = (EditText)findViewById(R.id.edit_resources_av_2);
+        editResourcesObt2 = (EditText)findViewById(R.id.edit_resources_item_obt_2);
+        editResourcesItem3 = (EditText)findViewById(R.id.edit_resources_item_3);
+        editResourcesAv3 = (EditText)findViewById(R.id.edit_resources_av_3);
+        editResourcesObt3 = (EditText)findViewById(R.id.edit_resources_item_obt_3);
+        editResourcesItem4 = (EditText)findViewById(R.id.edit_resources_item_4);
+        editResourcesAv4 = (EditText)findViewById(R.id.edit_resources_av_4);
+        editResourcesObt4 = (EditText)findViewById(R.id.edit_resources_item_obt_4);
+        editResourcesItem5 = (EditText)findViewById(R.id.edit_resources_item_5);
+        editResourcesAv5 = (EditText)findViewById(R.id.edit_resources_av_5);
+        editResourcesObt5 = (EditText)findViewById(R.id.edit_resources_item_obt_5);
+
+        editResourcesConditionItem1 = (EditText)findViewById(R.id.edit_condition_item_1);
+        editResourcesConditionInfo1 = (EditText)findViewById(R.id.edit_condition_info_1);
+        editResourcesConditionItem2 = (EditText)findViewById(R.id.edit_condition_item_2);
+        editResourcesConditionInfo2 = (EditText)findViewById(R.id.edit_condition_info_2);
+        editResourcesConditionItem3 = (EditText)findViewById(R.id.edit_condition_item_3);
+        editResourcesConditionInfo3 = (EditText)findViewById(R.id.edit_condition_info_3);
+        editResourcesConditionItem4 = (EditText)findViewById(R.id.edit_condition_item_4);
+        editResourcesConditionInfo4 = (EditText)findViewById(R.id.edit_condition_info_4);
+        editResourcesConditionItem5 = (EditText)findViewById(R.id.edit_condition_item_5);
+        editResourcesConditionInfo5 = (EditText)findViewById(R.id.edit_condition_info_5);
+
+
+        //IMPLEMENTATION FRAGMENT ELEMENTS
+        editDiffusionBeforeAudience = (EditText)findViewById(R.id.editText26);
+        editDiffusionBeforeDifussionChannel = (EditText)findViewById(R.id.editText27);
+        editDiffusionBeforeObjective = (EditText)findViewById(R.id.editText28);
+        editDiffusionDuringAudience = (EditText)findViewById(R.id.editText29);
+        editDiffusionDuringDifussionChannel = (EditText)findViewById(R.id.editText30);
+        editDiffusionDuringObjective = (EditText)findViewById(R.id.editText31);
+        editDiffusionAfterAudience = (EditText)findViewById(R.id.editText32);
+        editDiffusionAfterDifussionChannel = (EditText)findViewById(R.id.editText33);
+        editDiffusionAfterObjective = (EditText)findViewById(R.id.editText34);
+
         if (read_only) {
             fillWithStoredValues();
-            removeEditingProperties();
+            //removeEditingProperties();
         }
 
     }
@@ -141,7 +198,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
     }
 
     private void removeEditingProperties() {
-        editRouteSheetSelectedMethodology.setInputType(InputType.TYPE_NULL);
+        //editRouteSheetSelectedMethodology.setInputType(InputType.TYPE_NULL);
         editRouteSheetInitiative.setInputType(InputType.TYPE_NULL);
         editRouteSheetObjective.setInputType(InputType.TYPE_NULL);
         editRouteSheetImplementationPlace.setInputType(InputType.TYPE_NULL);
@@ -199,66 +256,9 @@ public class StagePlanificationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: 07-11-2017 send info to api
 
-                FragmentManager fragmentManager = StagePlanificationActivity.this.getSupportFragmentManager();
-                List<Fragment> fragments = fragmentManager.getFragments();
-
-                //ROUTE SHEET FRAGMENT ELEMENTS
-                editRouteSheetSelectedMethodology = fragments.get(0).getView().findViewById(R.id.edit_selected_methodology);
-                editRouteSheetInitiative = fragments.get(0).getView().findViewById(R.id.edit_initiative);
-                editRouteSheetObjective = fragments.get(0).getView().findViewById(R.id.edit_objective);
-                editRouteSheetImplementationPlace = fragments.get(0).getView().findViewById(R.id.edit_implementation_place);
-                editRouteSheetInitialDate = fragments.get(0).getView().findViewById(R.id.edit_initial_date);
-                editRouteSheetFinishDate = fragments.get(0).getView().findViewById(R.id.edit_finish_date);
-                editRouteSheetTeamMemberName1 = fragments.get(0).getView().findViewById(R.id.edit_member_name_1);
-                editRouteSheetTeamMemberRol1 = fragments.get(0).getView().findViewById(R.id.edit_member_rol_1);
-                editRouteSheetTeamMemberName2 = fragments.get(0).getView().findViewById(R.id.edit_member_name_2);
-                editRouteSheetTeamMemberRol2 = fragments.get(0).getView().findViewById(R.id.edit_member_rol_2);
-                editRouteSheetTeamMemberName3 = fragments.get(0).getView().findViewById(R.id.edit_member_name_3);
-                editRouteSheetTeamMemberRol3 = fragments.get(0).getView().findViewById(R.id.edit_member_rol_3);
-                editRouteSheetTeamMemberName4 = fragments.get(0).getView().findViewById(R.id.edit_member_name_4);
-                editRouteSheetTeamMemberRol4 = fragments.get(0).getView().findViewById(R.id.edit_member_rol_4);
-                editRouteSheetTeamMemberName5 = fragments.get(0).getView().findViewById(R.id.edit_member_name_5);
-                editRouteSheetTeamMemberRol5 = fragments.get(0).getView().findViewById(R.id.edit_member_rol_5);
-
-                //ROSOURCES FRAGMENT ELEMENTS
-                editResourcesItem1 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_1);
-                editResourcesAv1 = fragments.get(1).getView().findViewById(R.id.edit_resources_av_1);
-                editResourcesObt1 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_obt_1);
-                editResourcesItem2 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_2);
-                editResourcesAv2 = fragments.get(1).getView().findViewById(R.id.edit_resources_av_2);
-                editResourcesObt2 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_obt_2);
-                editResourcesItem3 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_3);
-                editResourcesAv3 = fragments.get(1).getView().findViewById(R.id.edit_resources_av_3);
-                editResourcesObt3 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_obt_3);
-                editResourcesItem4 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_4);
-                editResourcesAv4 = fragments.get(1).getView().findViewById(R.id.edit_resources_av_4);
-                editResourcesObt4 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_obt_4);
-                editResourcesItem5 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_5);
-                editResourcesAv5 = fragments.get(1).getView().findViewById(R.id.edit_resources_av_5);
-                editResourcesObt5 = fragments.get(1).getView().findViewById(R.id.edit_resources_item_obt_5);
-
-                editResourcesConditionItem1 = fragments.get(1).getView().findViewById(R.id.edit_condition_item_1);
-                editResourcesConditionInfo1 = fragments.get(1).getView().findViewById(R.id.edit_condition_info_1);
-                editResourcesConditionItem2 = fragments.get(1).getView().findViewById(R.id.edit_condition_item_2);
-                editResourcesConditionInfo2 = fragments.get(1).getView().findViewById(R.id.edit_condition_info_2);
-                editResourcesConditionItem3 = fragments.get(1).getView().findViewById(R.id.edit_condition_item_3);
-                editResourcesConditionInfo3 = fragments.get(1).getView().findViewById(R.id.edit_condition_info_3);
-                editResourcesConditionItem4 = fragments.get(1).getView().findViewById(R.id.edit_condition_item_4);
-                editResourcesConditionInfo4 = fragments.get(1).getView().findViewById(R.id.edit_condition_info_4);
-                editResourcesConditionItem5 = fragments.get(1).getView().findViewById(R.id.edit_condition_item_5);
-                editResourcesConditionInfo5 = fragments.get(1).getView().findViewById(R.id.edit_condition_info_5);
 
 
-                //IMPLEMENTATION FRAGMENT ELEMENTS
-                editDiffusionBeforeAudience = fragments.get(1).getView().findViewById(R.id.editText26);
-                editDiffusionBeforeDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText27);
-                editDiffusionBeforeObjective = fragments.get(1).getView().findViewById(R.id.editText28);
-                editDiffusionDuringAudience = fragments.get(1).getView().findViewById(R.id.editText29);
-                editDiffusionDuringDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText30);
-                editDiffusionDuringObjective = fragments.get(1).getView().findViewById(R.id.editText31);
-                editDiffusionAfterAudience = fragments.get(1).getView().findViewById(R.id.editText32);
-                editDiffusionAfterDifussionChannel = fragments.get(1).getView().findViewById(R.id.editText33);
-                editDiffusionAfterObjective = fragments.get(1).getView().findViewById(R.id.editText34);
+
 
                 // TODO: 07-11-2017 REQUEST
 
@@ -274,7 +274,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                             meth_id
                     ).execute();
                 } catch (Exception e) {
-                    Log.i("error",e.toString());
+                    System.out.println("PSD: Error planning task");
                     Toast.makeText(StagePlanificationActivity.this, "No se logró grabar la hoja de ruta", Toast.LENGTH_SHORT).show();
                 }
 
@@ -303,7 +303,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     meth_id
                             ).execute();
                         } catch (Exception e) {
-                            Log.i("error",e.toString());
+                            System.out.println("PSD: Error roles");
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a los usuarios en la hoja de ruta", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -342,7 +342,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     meth_id
                             ).execute();
                         } catch (Exception e) {
-                            Log.i("error",e.toString());
+                            System.out.println("PSD: Error resource");
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a los recursos en la hoja de ruta", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -375,7 +375,7 @@ public class StagePlanificationActivity extends AppCompatActivity {
                                     meth_id
                             ).execute();
                         } catch (Exception e) {
-                            Log.i("error",e.toString());
+                            System.out.println("PSD: Error condition");
                             Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las condiciones en la hoja de ruta", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -410,17 +410,17 @@ public class StagePlanificationActivity extends AppCompatActivity {
                             meth_id
                     ).execute();
                 } catch (Exception e) {
-                    Log.i("error",e.toString());
+                    System.out.println("PSD: Error broadcast");
                     Toast.makeText(StagePlanificationActivity.this, "No se logró grabar a las instancias de difusión en la hoja de ruta", Toast.LENGTH_SHORT).show();
                 }
 
-                Log.i("aaa",editRouteSheetSelectedMethodology.getText().toString());
+                //Log.i("aaa",editRouteSheetSelectedMethodology.getText().toString());
                 Log.i("aaa",editResourcesItem1.getText().toString());
                 Log.i("aaa",editDiffusionBeforeAudience.getText().toString());
                 try {
                     new UpdateStep(vosdb, StagePlanificationActivity.this, meth_id).execute().get();
                 } catch (Exception e) {
-                    Log.i("error", e.toString());
+                    System.out.println("PSD: Error step");
                 }
                 StagePlanificationActivity.this.finish();
             }

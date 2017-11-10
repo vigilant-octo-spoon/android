@@ -72,7 +72,7 @@ public class StageEvaluateActivity extends AppCompatActivity {
 
         if (read_only) {
             fillWithStoredValues();
-            removeEditingProperties();
+            //removeEditingProperties();
         }
     }
 

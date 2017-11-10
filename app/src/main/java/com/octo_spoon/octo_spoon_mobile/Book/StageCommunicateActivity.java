@@ -69,7 +69,7 @@ public class StageCommunicateActivity extends AppCompatActivity {
         });
         if (read_only) {
             fillWithStoredValues();
-            removeEditingProperties();
+            //removeEditingProperties();
         }
     }
 

@@ -86,7 +86,7 @@ public class StageImplementationActivity extends AppCompatActivity {
         });
         if (read_only) {
             fillWithStoredValues();
-            removeEditingProperties();
+            //removeEditingProperties();
         }
     }
 
