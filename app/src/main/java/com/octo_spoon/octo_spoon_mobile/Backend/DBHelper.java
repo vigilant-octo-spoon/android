@@ -335,6 +335,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public int getStep(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from follows were id=" + Integer.toString(id), null);
+        res.moveToNext();
+        return res.getInt(2);
+    }
+
+    public void updateStep(int step, int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("step", step);
+        db.update("follows", cv, "id="+id, null);
+    }
+
     public void clearDB(String dbName) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(dbName, null, null);
